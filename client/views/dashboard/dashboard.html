@@ -1,0 +1,35 @@
+<template name="dashboard">
+  <div class="container dashboard">
+
+    <div class="page-header">
+      <h1>Dashboard</h1>
+      <div class="page-header-actions">
+        <p>
+          <button class="btn btn-default pull-right open-modal_addTestimonial" data-toggle="modal" data-target="#modalAdd_testimonial"><i class="fa fa-plus"></i>  Testimonial</button>
+          <button class="btn btn-default pull-right open-modal" data-toggle="modal" data-target="#modalAdd_project"><i class="fa fa-plus"></i> Project</button>
+      </p>
+      </div>
+    </div>
+      {{#each eachProject}}
+        <div class="col-md-4">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                {{name}} <small>{{clientCompany.name}}</small>
+              </h3>
+            </div>
+            <div class="panel-body">
+              {{testimonialCount}} testimonials
+            </div>
+            <div class="panel-footer">
+              <div class="panel-meta pull-left">{{projectCategory.name}} <span>&#8226;</span> {{date.end}}</div>
+              <a href="/project/view/{{_id}}" class="pull-right"><small>View Project <i class="fa fa-angle-right"></i></small></a>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+  </div>
+
+  {{> modalAdd_project}}
+  {{> modalAdd_testimonial}}
+</template>

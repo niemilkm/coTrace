@@ -1,0 +1,12 @@
+.admin ul {
+
+	list-style: none;
+	padding: 0;
+	margin: 0;
+
+}
+
+.admin.headerTitle.h3 {
+	text-align: center;
+
+}

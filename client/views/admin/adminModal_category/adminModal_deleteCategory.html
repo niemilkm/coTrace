@@ -1,0 +1,25 @@
+
+<template name="adminModal_deleteCategory">
+ <!-- Add Fields Modal -->
+  <div class="modal fade in" id="adminModal_deleteCategory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_deleteCategory" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close modalClose" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Delete Category</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <p>Category <strong>{{categoryName_deleteCategory}}</strong> will be deleted along with <span class="blueText" data-toggle="tooltip" data-placement="left" title="{{projectsToDelete}}">{{projectCount_deleteCategory}} project(s)</span> and {{testimonialCount_deleteCategory}} testimonial(s) associated with this category.</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default modalClose" data-dismiss="modal">Cancel</button>
+          <button type="button" id="deleteCategory" class="btn btn-primary">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

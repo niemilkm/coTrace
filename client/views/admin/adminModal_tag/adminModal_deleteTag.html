@@ -1,0 +1,25 @@
+
+<template name="adminModal_deleteTag">
+ <!-- Add Fields Modal -->
+  <div class="modal fade in" id="adminModal_deleteTag" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_deleteTag" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close modalClose" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Delete Tag</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <p>Tag <strong>{{tagName_deleteTag}}</strong> will be deleted along with <span class="blueText" data-toggle="tooltip" data-placement="left" title="{{projectsToDelete}}">{{projectCount_deleteTag}} project(s)</span> and {{testimonialCount_deleteTag}} testimonial(s) associated with this tag.</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default modalClose" data-dismiss="modal">Cancel</button>
+          <button type="button" id="deleteTag" class="btn btn-primary">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

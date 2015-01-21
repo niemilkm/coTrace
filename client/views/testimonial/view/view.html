@@ -1,0 +1,54 @@
+<template name="testimonialView">
+  <div class="container testimonial-view">
+
+    <div class="page-header">
+      <h1>{{author.name}} <small>{{author.authorCompany}}</small>
+        <button class="btn btn-default pull-right open-modal_editTestimonial" data-toggle="modal" data-target="#modalEdit_testimonial"><i class="fa fa-edit"></i>  Edit Testimonial</button>
+      </h1>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="row">
+          <div class="col-md-6">
+            <label>Name</label>
+            <p>{{author.name}}</p>
+          </div>
+          <div class="col-md-6">
+            <label>Title</label>
+            <p>{{author.title}}</p>
+          </div>
+          <div class="col-md-6">
+            <label>Company</label>
+            <p>{{author.authorCompany}}</p>
+          </div>
+          <div class="col-md-6">
+            <label>Project</label>
+            <p>{{project.name}}</p>
+          </div>
+          <div class="col-md-6">
+            <label>Phone</label>
+            <p>{{author.phone}}</p>
+          </div>
+          <div class="col-md-6">
+            <label>Email</label>
+            <p><a href="mailto:{{testimonial.author.email}}">{{author.email}}</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <blockquote>
+          <p>{{testimonial}}</p>
+          <footer>
+            {{author.name}} <span>{{author.title}}, {{author.authorCompany}}</span>
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+
+  {{> modalEdit_testimonial}}
+</template>

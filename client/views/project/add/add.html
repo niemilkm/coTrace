@@ -1,0 +1,50 @@
+<template name="ProjectAdd">
+  <div class="container">
+
+    <div class="page-header">
+      <h1>Add Project</h1>
+      <div class="page-header-actions">
+        <button class="btn btn-default open-modal" data-toggle="modal" data-target="#modalAdd_project"><i class="fa fa-edit"></i> Add Inputs</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <form>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>Project Name</label>
+              <input id="projectName" type="text" class="form-control">
+            </div>
+            <div class="form-group col-md-6">
+              <label>Client/Company Name</label>
+              <select id="companyName" class="form-control" title="Choose Author">
+                {{#each client}}
+                  <option>{{name}}</option>
+                {{/each}}
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>Category</label>
+              <select id="category" class="form-control">
+                {{#each category}}
+                  <option>{{name}}</option>
+                {{/each}}
+              </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Add Tags</label>
+              <input id="tag" type="text" class="form-control">
+            </div>
+          </div>
+          <button type="submit" id= "saveTestimonial" class="pull-right btn btn-lg btn-blue">Save Project</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  {{> modalAdd}}
+
+</template>

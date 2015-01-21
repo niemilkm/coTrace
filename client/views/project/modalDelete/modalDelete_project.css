@@ -1,0 +1,17 @@
+
+#modalDelete_project .modal-dialog {
+
+	  width: 60%; 
+	  left: 0%; /* (100%-width)/2 */
+	  margin-left:auto;
+	  margin-right:auto;
+
+}
+
+.left-arrow {
+    color: #1475B9;
+}
+
+.right-arrow {
+    color: #1475B9;
+}

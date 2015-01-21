@@ -1,0 +1,61 @@
+ <template name="modalAdd_testimonial">
+ <!-- Add Fields Modal -->
+  <div class="modal fade in" id="modalAdd_testimonial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_testimonial" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close closeModal" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Add Testimonial</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            {{#if hidden_testimonial}}
+              <div class="col-md-2 right-arrow-div">
+                <p>Add Author <i class="fa fa-chevron-right right-arrow"></i></p>
+              </div>
+            {{else}}
+              <div class="col-md-4 left-arrow-div">
+                <p>Add Author <i class="fa fa-chevron-left left-arrow"></i></p>
+                {{> sideBar_addTestimonial}}
+              </div>
+            {{/if}}
+            <div class="col-md-8">
+              <form>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label>Project Name</label>
+                    <select id="projectName_modalTestimonial" class="form-control" title="Choose Author">
+                      <option value=""></option>
+                      {{#each project}}
+                        <option value="{{_id}}">{{name}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6 authorSelect">
+                    <label>Author</label>
+                    <select id="authorName_modalTestimonial" class="form-control" title="Choose Author">
+                      <option value=""></option>
+                      {{#each author}}
+                        <option value="{{_id}}">{{name}}</option>
+                      {{/each}}
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-12">
+                    <label>Testimonial</label>
+                    <textarea id="testimonial_modalTestimonial" class="form-control" rows="8"></textarea>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default closeModal" data-dismiss="modal">Cancel</button>
+          <button type="button" id="addTestimonialDetails" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
