@@ -25,6 +25,10 @@ Meteor.methods({
 
 	remove_testimonial_byProjectId: function(projectId) {
 		Testimonials.remove({project: projectId})
+	},
+
+	remove_testimonial_byId: function(Id) {
+		Testimonials.remove({_id: Id})
 	}
 
 });

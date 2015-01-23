@@ -2,131 +2,133 @@
   <div class="container admin">
 
     <div class="page-header">
-      <h1>Admin</h1>
-      <div class="page-header-actions">
-        <p>
-          <button class="btn btn-default pull-right clientEdit" data-toggle="modal" data-target="#modalAdd_testimonial"><i class="fa fa-edit"></i>  Client</button>
-          <button class="btn btn-default pull-right categoryEdit" data-toggle="modal" data-target="#modalAdd_project"><i class="fa fa-edit"></i> Category</button>
-          <button class="btn btn-default pull-right tagEdit" data-toggle="modal" data-target="#modalAdd_project"><i class="fa fa-edit"></i> Tag</button>
-          <button class="btn btn-default pull-right authorEdit" data-toggle="modal" data-target="#modalAdd_author"><i class="fa fa-edit"></i> Author</button>
-        </p>
-      </div>
+      <h1>Admin
+        <br>
+        <button class="btn btn-default pull-right clientEdit" data-toggle="modal" data-target="#modalAdd_testimonial"><i class="fa fa-edit"></i>  Client</button>
+        <button class="btn btn-default pull-right categoryEdit" data-toggle="modal" data-target="#modalAdd_project"><i class="fa fa-edit"></i> Category</button>
+        <button class="btn btn-default pull-right tagEdit" data-toggle="modal" data-target="#modalAdd_project"><i class="fa fa-edit"></i> Tag</button>
+        <button class="btn btn-default pull-right authorEdit" data-toggle="modal" data-target="#modalAdd_author"><i class="fa fa-edit"></i> Author</button>
+      </h1>
+      <br>
     </div>
-    <div class="row">
-      <div class="col-md-4">
-        {{#if clientEditDelete}}
-          <div class="headerTitle">
-            <h3>Clients</h3>
-          </div>
-          <div class="row">
-            <div class="col-md-10">
-              <input id="clientAdd" type="text" class="form-control">
-              <p><button id="clientAdd_submit" type="submit" class="pull-right btn btn-blue btn-sm"> <i class=" fa fa-plus"> Add Client</i></button></p><br><br>
+    
+    <div class="page-header-actions">
+      <div class="row">
+        <div class="col-md-4">
+          {{#if clientEditDelete}}
+            <div class="headerTitle">
+              <h3>Clients</h3>
             </div>
-          </div>
-          <ul>
-          {{#each eachClient}}
-          <li><div class="row">
-            <div class="col-md-2">
-              <button class="btn btn-blue btn-xs deleteClient" data-toggle="modal" data-target="#adminModal_deleteClient" data-id="{{_id}}"><i class="fa fa-trash-o icon-large"></i> Delete</button>
+            <div class="row">
+              <div class="col-md-10">
+                <input id="clientAdd" type="text" class="form-control">
+                <p><button id="clientAdd_submit" type="submit" class="pull-right btn btn-blue btn-sm"> <i class=" fa fa-plus"> Add Client</i></button></p><br><br>
+              </div>
             </div>
-            <div class="col-md-2">
-              <button class="btn btn-blue btn-xs editClient" data-toggle="modal" data-target="#adminModal_editClient" data-id="{{_id}}"><i class="fa fa-edit icon-large"></i> Edit</button>
+            <ul>
+            {{#each eachClient}}
+            <li><div class="row">
+              <div class="col-md-2">
+                <button class="btn btn-blue btn-xs deleteClient" data-toggle="modal" data-target="#adminModal_deleteClient" data-id="{{_id}}"><i class="fa fa-trash-o icon-large"></i> Delete</button>
+              </div>
+              <div class="col-md-2">
+                <button class="btn btn-blue btn-xs editClient" data-toggle="modal" data-target="#adminModal_editClient" data-id="{{_id}}"><i class="fa fa-edit icon-large"></i> Edit</button>
+              </div>
+              <div class="col-md-8">
+                <p>{{name}}</p>
+              </div>
+            </div></li>
+            {{/each}}
+            </ul>
+            {{> adminModal_editClient}}
+            {{> adminModal_deleteClient}}
+          {{/if}}
+          {{#if authorEditDelete}}
+            <div class="headerTitle">
+              <h3>Authors</h3>
             </div>
-            <div class="col-md-8">
-              <p>{{name}}</p>
+            <div class="row">
+              <div class="col-md-10">
+                <input id="authorAdd" type="text" class="form-control">
+                <p><button id="authorAdd_submit" type="submit" class="pull-right btn btn-blue btn-sm" data-toggle="modal" data-target="#adminModal_addAuthor"> <i class=" fa fa-plus"> Add Author</i></button></p><br><br>
+              </div>
             </div>
-          </div></li>
-          {{/each}}
-          </ul>
-          {{> adminModal_editClient}}
-          {{> adminModal_deleteClient}}
-        {{/if}}
-        {{#if authorEditDelete}}
-          <div class="headerTitle">
-            <h3>Authors</h3>
-          </div>
-          <div class="row">
-            <div class="col-md-10">
-              <input id="authorAdd" type="text" class="form-control">
-              <p><button id="authorAdd_submit" type="submit" class="pull-right btn btn-blue btn-sm" data-toggle="modal" data-target="#adminModal_addAuthor"> <i class=" fa fa-plus"> Add Author</i></button></p><br><br>
+            <ul>
+            {{#each eachAuthor}}
+            <li><div class="row">
+              <div class="col-md-2">
+                <button class="btn btn-blue btn-xs deleteAuthor" data-toggle="modal" data-target="#adminModal_deleteAuthor" data-id="{{_id}}"><i class="fa fa-trash-o icon-large"></i> Delete</button>
+              </div>
+              <div class="col-md-2">
+                <button class="btn btn-blue btn-xs editAuthor" data-toggle="modal" data-target="#adminModal_editAuthor" data-id="{{_id}}"><i class="fa fa-edit icon-large"></i> Edit</button>
+              </div>
+              <div class="col-md-8">
+                <p>{{name}}</p>
+              </div>
+            </div></li>
+            {{/each}}
+            </ul>
+            {{> adminModal_editAuthor}}
+            {{> adminModal_deleteAuthor}}
+            {{> adminModal_addAuthor}}
+          {{/if}}
+          {{#if categoryEditDelete}}
+            <div class="headerTitle">
+              <h3>Categories</h3>
             </div>
-          </div>
-          <ul>
-          {{#each eachAuthor}}
-          <li><div class="row">
-            <div class="col-md-2">
-              <button class="btn btn-blue btn-xs deleteAuthor" data-toggle="modal" data-target="#adminModal_deleteAuthor" data-id="{{_id}}"><i class="fa fa-trash-o icon-large"></i> Delete</button>
+            <div class="row">
+              <div class="col-md-10">
+                <input id="categoryAdd" type="text" class="form-control">
+                <p><button id="categoryAdd_submit" type="submit" class="pull-right btn btn-blue btn-sm"> <i class=" fa fa-plus"> Add Category</i></button></p><br><br>
+              </div>
             </div>
-            <div class="col-md-2">
-              <button class="btn btn-blue btn-xs editAuthor" data-toggle="modal" data-target="#adminModal_editAuthor" data-id="{{_id}}"><i class="fa fa-edit icon-large"></i> Edit</button>
+            <ul>
+            {{#each eachCategory}}
+            <li><div class="row">
+              <div class="col-md-2">
+                <button class="btn btn-blue btn-xs deleteCategory" data-toggle="modal" data-target="#adminModal_deleteCategory" data-id="{{_id}}"><i class="fa fa-trash-o icon-large"></i> Delete</button>
+              </div>
+              <div class="col-md-2">
+                <button class="btn btn-blue btn-xs editCategory" data-toggle="modal" data-target="#adminModal_editCategory" data-id="{{_id}}"><i class="fa fa-edit icon-large"></i> Edit</button>
+              </div>
+              <div class="col-md-8">
+                <p>{{name}}</p>
+              </div>
+            </div></li>
+            {{/each}}
+            </ul>
+            {{> adminModal_editCategory}}
+            {{> adminModal_deleteCategory}}
+          {{/if}}
+          {{#if tagEditDelete}}
+            <div class="headerTitle">
+              <h3>Tags</h3>
             </div>
-            <div class="col-md-8">
-              <p>{{name}}</p>
+            <div class="row">
+              <div class="col-md-10">
+                <input id="tagAdd" type="text" class="form-control">
+                <p><button id="tagAdd_submit" type="submit" class="pull-right btn btn-blue btn-sm"> <i class=" fa fa-plus"> Add Tag</i></button></p><br><br>
+              </div>
             </div>
-          </div></li>
-          {{/each}}
-          </ul>
-          {{> adminModal_editAuthor}}
-          {{> adminModal_deleteAuthor}}
-          {{> adminModal_addAuthor}}
-        {{/if}}
-        {{#if categoryEditDelete}}
-          <div class="headerTitle">
-            <h3>Categories</h3>
-          </div>
-          <div class="row">
-            <div class="col-md-10">
-              <input id="categoryAdd" type="text" class="form-control">
-              <p><button id="categoryAdd_submit" type="submit" class="pull-right btn btn-blue btn-sm"> <i class=" fa fa-plus"> Add Category</i></button></p><br><br>
-            </div>
-          </div>
-          <ul>
-          {{#each eachCategory}}
-          <li><div class="row">
-            <div class="col-md-2">
-              <button class="btn btn-blue btn-xs deleteCategory" data-toggle="modal" data-target="#adminModal_deleteCategory" data-id="{{_id}}"><i class="fa fa-trash-o icon-large"></i> Delete</button>
-            </div>
-            <div class="col-md-2">
-              <button class="btn btn-blue btn-xs editCategory" data-toggle="modal" data-target="#adminModal_editCategory" data-id="{{_id}}"><i class="fa fa-edit icon-large"></i> Edit</button>
-            </div>
-            <div class="col-md-8">
-              <p>{{name}}</p>
-            </div>
-          </div></li>
-          {{/each}}
-          </ul>
-          {{> adminModal_editCategory}}
-          {{> adminModal_deleteCategory}}
-        {{/if}}
-        {{#if tagEditDelete}}
-          <div class="headerTitle">
-            <h3>Tags</h3>
-          </div>
-          <div class="row">
-            <div class="col-md-10">
-              <input id="tagAdd" type="text" class="form-control">
-              <p><button id="tagAdd_submit" type="submit" class="pull-right btn btn-blue btn-sm"> <i class=" fa fa-plus"> Add Tag</i></button></p><br><br>
-            </div>
-          </div>
-          <ul>
-          {{#each eachTag}}
-          <li><div class="row">
-            <div class="col-md-2">
-              <button class="btn btn-blue btn-xs deleteTag" data-toggle="modal" data-target="#adminModal_deleteTag" data-id="{{_id}}"><i class="fa fa-trash-o icon-large"></i> Delete</button>
-            </div>
-            <div class="col-md-2">
-              <button class="btn btn-blue btn-xs editTag" data-toggle="modal" data-target="#adminModal_editTag" data-id="{{_id}}"><i class="fa fa-edit icon-large"></i> Edit</button>
-            </div>
-            <div class="col-md-8">
-              <p>{{name}}</p>
-            </div>
-          </div></li>
-          {{/each}}
-          </ul>
-          {{> adminModal_editTag}}
-          {{> adminModal_deleteTag}}
-        {{/if}}
+            <ul>
+            {{#each eachTag}}
+            <li><div class="row">
+              <div class="col-md-2">
+                <button class="btn btn-blue btn-xs deleteTag" data-toggle="modal" data-target="#adminModal_deleteTag" data-id="{{_id}}"><i class="fa fa-trash-o icon-large"></i> Delete</button>
+              </div>
+              <div class="col-md-2">
+                <button class="btn btn-blue btn-xs editTag" data-toggle="modal" data-target="#adminModal_editTag" data-id="{{_id}}"><i class="fa fa-edit icon-large"></i> Edit</button>
+              </div>
+              <div class="col-md-8">
+                <p>{{name}}</p>
+              </div>
+            </div></li>
+            {{/each}}
+            </ul>
+            {{> adminModal_editTag}}
+            {{> adminModal_deleteTag}}
+          {{/if}}
+        </div>
       </div>
     </div>
   </div>

@@ -105,6 +105,7 @@ Template.modalAdd_testimonial.events =
           $('#authorCompany_modalTestimonial').val('');
           $('#testimonial_modalTestimonial').val('');
           $('#authorNameAdd_testimonial').val('');
+          $('#authorCompanyAdd_modalTestimonial').val('');
           $('#authorTitleAdd_testimonial').val('');
           $('#authorPhoneAdd_testimonial').val('');
           $('#authorEmailAdd_testimonial').val('');
@@ -134,6 +135,7 @@ Template.modalAdd_testimonial.events =
             $('#authorCompany_modalTestimonial').val('');
             $('#testimonial_modalTestimonial').val('');
             $('#authorNameAdd_testimonial').val('');
+            $('#authorCompanyAdd_modalTestimonial').val('');
             $('#authorTitleAdd_testimonial').val('');
             $('#authorPhoneAdd_testimonial').val('');
             $('#authorEmailAdd_testimonial').val('');
@@ -153,6 +155,7 @@ Template.modalAdd_testimonial.events =
     $('#authorCompany_modalTestimonial').val('');
     $('#testimonial_modalTestimonial').val('');
     $('#authorNameAdd_testimonial').val('');
+    $('#authorCompanyAdd_modalTestimonial').val('');
     $('#authorTitleAdd_testimonial').val('');
     $('#authorPhoneAdd_testimonial').val('');
     $('#authorEmailAdd_testimonial').val('');

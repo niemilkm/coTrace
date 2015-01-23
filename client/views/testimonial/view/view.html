@@ -4,6 +4,7 @@
     <div class="page-header">
       <h1>{{author.name}} <small>{{author.authorCompany}}</small>
         <button class="btn btn-default pull-right open-modal_editTestimonial" data-toggle="modal" data-target="#modalEdit_testimonial"><i class="fa fa-edit"></i>  Edit Testimonial</button>
+        <button class="btn btn-default pull-right open-modal_deleteTestimonial" data-toggle="modal" data-target="#modalDelete_testimonial"><i class="fa fa-edit"></i>  Delete Testimonial</button>
       </h1>
     </div>
 
@@ -51,4 +52,5 @@
   </div>
 
   {{> modalEdit_testimonial}}
+  {{> modalDelete_testimonial}}
 </template>

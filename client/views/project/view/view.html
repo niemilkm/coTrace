@@ -3,35 +3,36 @@
 
     <div class="page-header">
       <h1>{{name}}<br>
-      <small>{{clientCompany.name}} <span>&#8226;</span> <small>{{category.name}} <span>&#8226;</span> tag</small></small></h1>
-      <div class="page-header-actions">
+        <small>{{clientCompany.name}} <span>&#8226;</span> <small>{{category.name}} <span>&#8226;</span> tag</small></small>
         <button class="btn btn-default pull-right open-modal_addTestimonial" data-toggle="modal" data-target="#modalAdd_testimonial"><i class="fa fa-plus"></i>  Testimonial</button>
         <button class="btn btn-default pull-right open-modal_editProject" data-toggle="modal" data-target="#modalEdit_project"><i class="fa fa-edit"></i> Edit</button>
         <button class="btn btn-default pull-right open-modal_deleteProject" data-toggle="modal" data-target="#modalDelete_project"><i class="fa fa-trash-o"></i> Delete</button>
-      </div>
+      </h1>
     </div>
 
-    {{#each eachTestimonial}}
-    <div class="row" id={{_id}}>
-      <div class="col-md-2">
-      </div>
-      <div class="col-md-10">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              {{author.name}} <small>{{author.title}}</small>
-            </h3>
-          </div>
-          <div class="panel-body">
-            {{testimonial}}
-          </div>
-          <div class="panel-footer">
-            .<a href="/testimonial/view/{{_id}}" class="pull-right"><small>View Testimonial <i class="fa fa-angle-right"></i></small></a>
+    <div class="page-header-actions">
+      {{#each eachTestimonial}}
+      <div class="row" id={{_id}}>
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-10">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                {{author.name}} <small>{{author.title}}</small>
+              </h3>
+            </div>
+            <div class="panel-body">
+              {{testimonial}}
+            </div>
+            <div class="panel-footer">
+              .<a href="/testimonial/view/{{_id}}" class="pull-right"><small>View Testimonial <i class="fa fa-angle-right"></i></small></a>
+            </div>
           </div>
         </div>
       </div>
+      {{/each}}
     </div>
-    {{/each}}
 
     <!-- <div class="row">
       <div class="col-md-8 col-md-offset-2">

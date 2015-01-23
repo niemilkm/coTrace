@@ -5,19 +5,19 @@ Router.map(function() {
   });
 
   this.route('dashboard', {
-    path: '/dashboard'
-    //loginRequired: 'entrySignIn',
-    //waitOn: function() {
-      //return this.subscribe("items");
-    //},
-    //data: {
-      //items: Items.find({})
-    //},
-    //onAfterAction: function() {
-      //SEO.set({
-        //title: 'Dashboard | ' + SEO.settings.title
-      //});
-    //}
+    path: '/dashboard',
+    loginRequired: 'entrySignIn',
+    waitOn: function() {
+      return this.subscribe("items");
+    },
+    data: {
+      items: Items.find({})
+    },
+    onAfterAction: function() {
+      SEO.set({
+        title: 'Dashboard | ' + SEO.settings.title
+      });
+    }
   });
 
   this.route('profile', {
@@ -34,6 +34,25 @@ Router.map(function() {
     }
   });
 
+  this.route('projectView', {
+    path: '/project/view/:id',
+    onAfterAction: function() {
+      Session.set("projectId", this.params.id)
+    },
+    data: function() {
+      return Projects.findOne({_id: this.params.id})
+    }
+  });
+
+  this.route('testimonialView', {
+    path: '/testimonial/view/:id',
+    onAfterAction: function() {
+      Session.set("testimonialId", this.params.id)
+    },
+    data: function() {
+      return Testimonials.findOne({_id: this.params.id})
+    }
+  });
 
   this.route('notFound', {
     path: '*',
