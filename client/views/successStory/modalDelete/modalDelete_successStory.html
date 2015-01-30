@@ -1,26 +1,22 @@
-
-<template name="adminModal_editClient_thinkCanDelete">
+ <template name="modalDelete_successStory">
  <!-- Add Fields Modal -->
-  <div class="modal fade in" id="adminModal_editClient" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal fade in" id="modalDelete_successStory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel_deleteSuccessStory" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close modalClose" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="myModalLabel">Edit Client</h4>
+          <h4 class="modal-title" id="myModalLabel">Delete Success Story</h4>
         </div>
         <div class="modal-body">
           <div class="row">
             <div class="col-md-12">
-              <form>
-              	<label>Client</label>
-                <input id="clientEdit" type="text" class="form-control">
-              </form>
+              <p>Success Story will be deleted.</p>
             </div>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default modalClose" data-dismiss="modal">Cancel</button>
-          <button type="button" id="editClientDetails" class="btn btn-primary">Update</button>
+          <button type="button" id="deleteSuccessStory" class="btn btn-primary">Delete</button>
         </div>
       </div>
     </div>

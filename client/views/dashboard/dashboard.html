@@ -5,6 +5,7 @@
       <h1>Dashboard</h1>
       <div class="page-header-actions">
         <p>
+          <button class="btn btn-default pull-right open-modal_addSuccessStory" data-toggle="modal" data-target="#modalAdd_successStory"><i class="fa fa-plus"></i>  Success Story</button>
           <button class="btn btn-default pull-right open-modal_addTestimonial" data-toggle="modal" data-target="#modalAdd_testimonial"><i class="fa fa-plus"></i>  Testimonial</button>
           <button class="btn btn-default pull-right open-modal" data-toggle="modal" data-target="#modalAdd_project"><i class="fa fa-plus"></i> Project</button>
       </p>
@@ -20,7 +21,11 @@
               </h3>
             </div>
             <div class="panel-body">
-              {{testimonialCount}} testimonials
+              <p>
+                {{testimonialCount}} testimonials
+                <br>
+                {{successStoryCount}} success stories
+              </p>
             </div>
             <div class="panel-footer">
               <div class="panel-meta pull-left">{{projectCategory.name}} <span>&#8226;</span> {{date.end}}</div>
@@ -33,4 +38,5 @@
 
   {{> modalAdd_project}}
   {{> modalAdd_testimonial}}
+  {{> modalAdd_successStory}}
 </template>

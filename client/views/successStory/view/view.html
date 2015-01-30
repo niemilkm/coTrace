@@ -1,0 +1,56 @@
+<template name="successStoryView">
+  <div class="container successStory-view">
+
+    <div class="page-header">
+      <h1>{{author.name}} <small>{{author.authorCompany}}</small>
+        <button class="btn btn-default pull-right open-modal_editSuccessStory" data-toggle="modal" data-target="#modalEdit_successStory"><i class="fa fa-edit"></i>  Edit Success Story</button>
+        <button class="btn btn-default pull-right open-modal_deleteSuccessStory" data-toggle="modal" data-target="#modalDelete_successStory"><i class="fa fa-edit"></i>  Delete Success Story</button>
+      </h1>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <div class="row">
+          <div class="col-md-6">
+            <label>Name</label>
+            <p>{{author.name}}</p>
+          </div>
+          <div class="col-md-6">
+            <label>Title</label>
+            <p>{{author.title}}</p>
+          </div>
+          <div class="col-md-6">
+            <label>Company</label>
+            <p>{{author.authorCompany}}</p>
+          </div>
+          <div class="col-md-6">
+            <label>Project</label>
+            <p>{{project.name}}</p>
+          </div>
+          <div class="col-md-6">
+            <label>Phone</label>
+            <p>{{author.phone}}</p>
+          </div>
+          <div class="col-md-6">
+            <label>Email</label>
+            <p><a href="mailto:{{successStory.author.email}}">{{author.email}}</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <blockquote>
+          <p>{{successStory}}</p>
+          <footer>
+            {{author.name}} <span>{{author.title}}, {{author.authorCompany}}</span>
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+
+  {{> modalEdit_successStory}}
+  {{> modalDelete_successStory}}
+</template>

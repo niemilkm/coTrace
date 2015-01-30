@@ -10,6 +10,12 @@
     return Testimonials.find({project: this._id}).count();
   },
 
+  successStoryCount: function()
+  {
+    console.log("project id" + this._id);
+    return SuccessStories.find({project: this._id}).count();
+  },
+
   clientCompany: function()
   {
   	return ClientCompanies.findOne({_id: this.clientCompany});
