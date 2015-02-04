@@ -3,11 +3,11 @@ Categories = new Meteor.Collection('category');
 Meteor.methods({
 	insert_category: function(category) {
 		var companyId = Companies.findOne({})._id;
-		Categories.insert({name: category, company: companyId});
+		Categories.insert({name: category, company: companyId, dateAdded: moment.utc(), dateUpdated: moment.utc()});
 	},
 
 	update_category: function(categoryId, category) {
-		Categories.update({_id: categoryId}, {$set: {name: category}});
+		Categories.update({_id: categoryId}, {$set: {name: category, dateUpdated: moment.utc()}});
 	},
 
 	remove_category: function(categoryId) {

@@ -7,11 +7,11 @@ Router.map(function() {
   this.route('dashboard', {
     path: '/dashboard',
     loginRequired: 'entrySignIn',
-    waitOn: function() {
-      return this.subscribe("items");
-    },
+    //waitOn: function() {
+      //return this.subscribe("items");
+    //},
     data: {
-      items: Items.find({})
+      projects: Projects.find({})
     },
     onAfterAction: function() {
       SEO.set({
@@ -51,6 +51,16 @@ Router.map(function() {
     },
     data: function() {
       return Testimonials.findOne({_id: this.params.id})
+    }
+  });
+
+  this.route('successStoryView', {
+    path: '/successStory/view/:id',
+    onAfterAction: function() {
+      Session.set("successStoryId", this.params.id)
+    },
+    data: function() {
+      return SuccessStories.findOne({_id: this.params.id})
     }
   });
 

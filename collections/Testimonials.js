@@ -3,12 +3,12 @@ Testimonials = new Meteor.Collection('testimonial');
 Meteor.methods({
 	insert_testimonial: function(td) {
 		var companyId = Companies.findOne({})._id;
-		Testimonials.insert({testimonial: td.testimonial, project: td.project, author: td.author, company: companyId});
+		Testimonials.insert({testimonial: td.testimonial, project: td.project, author: td.author, company: companyId, dateAdded: moment.utc(), dateUpdated: moment.utc()});
 		console.log("testimonial inserted");
 	},
 
 	update_testimonial: function(td, td_id) {
-		Testimonials.update({_id: td_id}, {$set: {testimonial: td.testimonial, project: td.project, author: td.author}});
+		Testimonials.update({_id: td_id}, {$set: {testimonial: td.testimonial, project: td.project, author: td.author, dateUpdated: moment.utc()}});
 		console.log("testimonial updated");
 	},
 

@@ -3,11 +3,11 @@ ClientCompanies = new Meteor.Collection('clientcompany');
 Meteor.methods({
 	insert_client: function(client) {
 		var companyId = Companies.findOne({})._id;
-		ClientCompanies.insert({name: client, company: companyId});
+		ClientCompanies.insert({name: client, company: companyId, dateAdded: moment.utc(), dateUpdated: moment.utc()});
 	},
 
 	update_client: function(id, name) {
-		ClientCompanies.update({_id: id}, {$set: {name: name}});
+		ClientCompanies.update({_id: id}, {$set: {name: name, dateUpdated: moment.utc()}});
 	},
 
 	remove_client: function(client) {

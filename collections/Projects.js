@@ -3,13 +3,13 @@ Projects = new Meteor.Collection('project');
 Meteor.methods({
 	update_projectDetails: function(pd, pd_id) {
 		console.log("project updated");
-		Projects.update({_id: pd_id}, {$set: {name: pd.project, clientCompany: pd.client, categories: pd.category, tags: pd.tag}});
+		Projects.update({_id: pd_id}, {$set: {name: pd.project, clientCompany: pd.client, categories: pd.category, tags: pd.tag, dateAdded: moment.utc(), dateUpdated: moment.utc()}});
 	},
 
 	insert_projectDetails: function(pd) {
 		console.log("project inserted");
 		var companyId = Companies.findOne({})._id;
-		Projects.insert({name: pd.project, clientCompany: pd.client, categories: pd.category, tags: pd.tag, company: companyId});
+		Projects.insert({name: pd.project, clientCompany: pd.client, categories: pd.category, tags: pd.tag, company: companyId, dateUpdated: moment.utc()});
 	},
 
 	remove_project_byProjectIds: function(projectObjects) {

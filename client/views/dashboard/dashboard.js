@@ -1,18 +1,19 @@
  Template.dashboard.helpers({
-  eachProject: function()
-  {
-    console.log(Projects.find({}).count())
-    return Projects.find({});
-  },
+  // eachProject: function() moved this to routes.js
+  // {
+  //   console.log(Projects.find({}).count())
+  //   return Projects.find({});
+  // },
 
   testimonialCount: function()
   {
+    console.log("project id (testimonial): " + this._id + " - " + Testimonials.find({project: this._id}).count());
     return Testimonials.find({project: this._id}).count();
   },
 
   successStoryCount: function()
   {
-    console.log("project id" + this._id);
+    console.log("project id (successStory: " + this._id + " - " + SuccessStories.find({project: this._id}).count());
     return SuccessStories.find({project: this._id}).count();
   },
 
