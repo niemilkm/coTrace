@@ -26,6 +26,7 @@ Meteor.publish('all', function()
             Projects.find({company: companyId}),
             Authors.find({company: companyId}),
             Testimonials.find({company: companyId}),
-            SuccessStories.find({company: companyId})
+            SuccessStories.find({company: companyId}),
+            SuccessStoryInputs.find({company: companyId})
           ];
 });

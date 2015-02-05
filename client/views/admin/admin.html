@@ -4,6 +4,7 @@
     <div class="page-header">
       <h1>Admin
         <br>
+        <button class="btn btn-default pull-right ssInputEdit" data-toggle="modal" data-target="#modalAdd_ssInput"><i class="fa fa-edit"></i>  Success Story</button>
         <button class="btn btn-default pull-right clientEdit" data-toggle="modal" data-target="#modalAdd_testimonial"><i class="fa fa-edit"></i>  Client</button>
         <button class="btn btn-default pull-right categoryEdit" data-toggle="modal" data-target="#modalAdd_project"><i class="fa fa-edit"></i> Category</button>
         <button class="btn btn-default pull-right tagEdit" data-toggle="modal" data-target="#modalAdd_project"><i class="fa fa-edit"></i> Tag</button>
@@ -127,6 +128,34 @@
             </ul>
             {{> adminModal_editTag}}
             {{> adminModal_deleteTag}}
+          {{/if}}
+          {{#if ssInputEditDelete}}
+            <div class="headerTitle">
+              <h3>Success Story Inputs</h3>
+            </div>
+            <div class="row">
+              <div class="col-md-10">
+                <input id="ssInputAdd" type="text" class="form-control">
+                <p><button id="ssInputAdd_submit" type="submit" class="pull-right btn btn-blue btn-sm"> <i class=" fa fa-plus"> Add Input</i></button></p><br><br>
+              </div>
+            </div>
+            <ul>
+            {{#each eachSSInput}}
+            <li><div class="row">
+              <div class="col-md-2">
+                <button class="btn btn-blue btn-xs deleteSSInput" data-toggle="modal" data-target="#adminModal_deleteSSInput" data-id="{{_id}}"><i class="fa fa-trash-o icon-large"></i> Delete</button>
+              </div>
+              <div class="col-md-2">
+                <button class="btn btn-blue btn-xs editSSInput" data-toggle="modal" data-target="#adminModal_editSSInput" data-id="{{_id}}"><i class="fa fa-edit icon-large"></i> Edit</button>
+              </div>
+              <div class="col-md-8">
+                <p>{{input}}</p>
+              </div>
+            </div></li>
+            {{/each}}
+            </ul>
+            {{> adminModal_editSSInput}}
+            {{> adminModal_deleteSSInput}}
           {{/if}}
         </div>
       </div>

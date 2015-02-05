@@ -1,0 +1,28 @@
+
+<template name="adminModal_editSSInput">
+ <!-- Add Fields Modal -->
+  <div class="modal fade in" id="adminModal_editSSInput" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close modalClose" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Edit Success Story Input</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <form>
+              	<label>Success Story Input</label>
+                <input id="ssInputEdit" type="text" class="form-control">
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default modalClose" data-dismiss="modal">Cancel</button>
+          <button type="button" id="editSSInputDetails" class="btn btn-primary">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

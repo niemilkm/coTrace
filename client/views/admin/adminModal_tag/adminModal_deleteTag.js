@@ -3,7 +3,7 @@ Template.adminModal_deleteTag.helpers({
   tagName_deleteTag: function()
   {
     console.log(Session.get("tagName_deleteTag"));
-    return Session.get("categoryName_deleteTag");
+    return Session.get("tagName_deleteTag");
   },
 
   projectCount_deleteTag: function()

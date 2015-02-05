@@ -20,9 +20,14 @@ Template.admin.helpers({
     return Tags.find({});
   },
 
+  eachSSInput: function()
+  {
+    return SuccessStoryInputs.find({});
+  },
+
   clientEditDelete: function()
   {
-    var val = Session.get("editDelete"); // 0=none, 1=client, 2=author, 3=category, 4=tag
+    var val = Session.get("editDelete"); // 0=none, 1=client, 2=author, 3=category, 4=tag, 5=ssInput
     console.log("val is: " + val);
     if (val==1)
       return true;
@@ -31,7 +36,7 @@ Template.admin.helpers({
 
   authorEditDelete: function()
   {
-    var val = Session.get("editDelete"); // 0=none, 1=client, 2=author, 3=category, 4=tag
+    var val = Session.get("editDelete"); // 0=none, 1=client, 2=author, 3=category, 4=tag, 5=ssInput
     if (val==2)
       return true;
     return false;
@@ -39,7 +44,7 @@ Template.admin.helpers({
 
   categoryEditDelete: function()
   {
-    var val = Session.get("editDelete"); // 0=none, 1=client, 2=author, 3=category, 4=tag
+    var val = Session.get("editDelete"); // 0=none, 1=client, 2=author, 3=category, 4=tag, 5=ssInput
     if (val==3)
       return true;
     return false;
@@ -47,8 +52,17 @@ Template.admin.helpers({
 
   tagEditDelete: function()
   {
-    var val = Session.get("editDelete"); // 0=none, 1=client, 2=author, 3=category, 4=tag
+    var val = Session.get("editDelete"); // 0=none, 1=client, 2=author, 3=category, 4=tag, 5=ssInput
     if (val==4)
+      return true;
+    return false;
+  },
+
+  ssInputEditDelete: function()
+  {
+    var val = Session.get("editDelete"); // 0=none, 1=client, 2=author, 3=category, 4=tag, 5=ssInput
+    console.log("in ssInputEditDelete    " + val)
+    if (val==5)
       return true;
     return false;
   },
@@ -89,6 +103,13 @@ Template.admin.events =
     $('#tagEdit').val( tagName );
   },
 
+  'click .editSSInput': function()
+  {
+    var ssInputName = SuccessStoryInputs.findOne({_id: this._id}).input
+    Session.set("editSSInput", this._id);
+    $('#ssInputEdit').val( ssInputName );
+  },
+
   'click #editClientDetails': function()
   {
     var clientName = $('#clientEdit').val().trim();
@@ -111,6 +132,14 @@ Template.admin.events =
     Meteor.call("update_tag", Session.get("editTag"), tagName);
     $('#tagEdit').val('')
     $('#adminModal_editTag').modal('hide');
+  },
+
+  'click #editSSInputDetails': function()
+  {
+    var ssInputName = $('#ssInputEdit').val().trim();
+    Meteor.call("update_ssInput", Session.get("editSSInput"), ssInputName);
+    $('#ssInputEdit').val('')
+    $('#adminModal_editSSInput').modal('hide');
   },
 
   'click #clientAdd_submit': function()
@@ -152,6 +181,20 @@ Template.admin.events =
     {
       $('#tagAdd').val('');
       Meteor.call("insert_tag", tag);
+    }
+  },
+
+  'click #ssInputAdd_submit': function()
+  {
+    var ssInput = $('#ssInputAdd').val().trim();
+    if (ssInput == "" || ssInput == null || ssInput == undefined)
+    {
+      alert("To Add a Success Story Input - Please Enter the Input");
+    }
+    else
+    {
+      $('#ssInputAdd').val('');
+      Meteor.call("insert_ssInput", ssInput);
     }
   },
 
@@ -289,20 +332,36 @@ Template.admin.events =
     
   },
 
+  'click .deleteSSInput': function()
+  {
+    var SSInputId = this._id;
+    //console.log("HEREEEEE: " + SSInputId);
+    //Session.set("deleteSSInput", SSInputId);
+    //ssInputName = SuccessStoryInputs.findOne({_id: ssInputId}).input;
+    //Session.set("ssInputName_deleteSSInput", ssInputName);
+    Session.set("ssInputToDelete_id", SSInputId);
+
+    console.log("done .deleteSSInput");
+  },
+
   'click .clientEdit': function() {
-    Session.set("editDelete", 1); // 0=none, 1=client, 2=author, 3=category, 4=tag
+    Session.set("editDelete", 1); // 0=none, 1=client, 2=author, 3=category, 4=tag, 5=ssInput
   },
 
   'click .authorEdit': function() {
-    Session.set("editDelete", 2); // 0=none, 1=client, 2=author, 3=category, 4=tag
+    Session.set("editDelete", 2); // 0=none, 1=client, 2=author, 3=category, 4=tag, 5=ssInput
   },
 
   'click .categoryEdit': function() {
-    Session.set("editDelete", 3); // 0=none, 1=client, 2=author, 3=category, 4=tag
+    Session.set("editDelete", 3); // 0=none, 1=client, 2=author, 3=category, 4=tag, 5=ssInput
   },
 
   'click .tagEdit': function() {
-    Session.set("editDelete", 4); // 0=none, 1=client, 2=author, 3=category, 4=tag
+    Session.set("editDelete", 4); // 0=none, 1=client, 2=author, 3=category, 4=tag, 5=ssInput
+  },
+
+  'click .ssInputEdit': function() {
+    Session.set("editDelete", 5); // 0=none, 1=client, 2=author, 3=category, 4=tag, 5=ssInput
   }
   
 }
