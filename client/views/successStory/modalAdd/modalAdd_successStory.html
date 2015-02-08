@@ -15,7 +15,7 @@
               </div>
             {{else}}
               <div class="col-md-4 left-arrow-div">
-                <p>Add Author <i class="fa fa-chevron-left left-arrow"></i></p>
+                <p>Add Contact <i class="fa fa-chevron-left left-arrow"></i></p>
                 {{> sideBar_addAuthor}}
               </div>
             {{/if}}
@@ -32,7 +32,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-6 authorSelect">
-                    <label>Author</label>
+                    <label>Client Contact</label>
                     <select id="authorName_modalSuccessStory" class="form-control" title="Choose Author">
                       <option value=""></option>
                       {{#each author}}
@@ -43,10 +43,18 @@
                 </div>
                 <div class="row">
                   <div class="form-group col-md-12">
-                    <label>Success Story</label>
-                    <textarea id="successStory_modalSuccessStory" class="form-control" rows="8"></textarea>
+                    <label>Success Story Name</label>
+                    <input id="successStoryName_modalSuccessStory" class="form-control" type="text">
                   </div>
                 </div>
+                {{#each SSInput}}
+                <div class="row">
+                  <div class="form-group col-md-12">
+                    <label>{{input}}</label>
+                    <textarea id="successStory_modalSuccessStory" class="form-control" rows="4"></textarea>
+                  </div>
+                </div>
+                {{/each}}
               </form>
             </div>
           </div>

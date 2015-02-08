@@ -213,6 +213,13 @@ Template.modalAdd_successStory.events =
 
 Template.modalAdd_successStory.helpers({
 
+  SSInput: function()
+  {
+    var companyId = Companies.findOne({})._id;
+    console.log("companyId:" + companyId)
+    return SuccessStoryInputs.find({company: companyId});
+  },
+
   hidden_successStory: function()
   {
     var hidden_successStory = Session.get("hidden_successStory");
