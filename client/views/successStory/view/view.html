@@ -2,7 +2,7 @@
   <div class="container successStory-view">
 
     <div class="page-header">
-      <h1>{{author.name}} <small>{{author.authorCompany}}</small>
+      <h1>{{project.name}}
         <button class="btn btn-default pull-right open-modal_editSuccessStory" data-toggle="modal" data-target="#modalEdit_successStory"><i class="fa fa-edit"></i>  Edit Success Story</button>
         <button class="btn btn-default pull-right open-modal_deleteSuccessStory" data-toggle="modal" data-target="#modalDelete_successStory"><i class="fa fa-edit"></i>  Delete Success Story</button>
       </h1>
@@ -12,15 +12,15 @@
       <div class="col-md-6 col-md-offset-3">
         <div class="row">
           <div class="col-md-6">
-            <label>Name</label>
+            <label>Contact Name</label>
             <p>{{author.name}}</p>
           </div>
           <div class="col-md-6">
-            <label>Title</label>
+            <label>Contact Title</label>
             <p>{{author.title}}</p>
           </div>
           <div class="col-md-6">
-            <label>Company</label>
+            <label>Contact Company</label>
             <p>{{author.authorCompany}}</p>
           </div>
           <div class="col-md-6">
@@ -28,11 +28,11 @@
             <p>{{project.name}}</p>
           </div>
           <div class="col-md-6">
-            <label>Phone</label>
+            <label>Contact Phone</label>
             <p>{{author.phone}}</p>
           </div>
           <div class="col-md-6">
-            <label>Email</label>
+            <label>Contact Email</label>
             <p><a href="mailto:{{successStory.author.email}}">{{author.email}}</a></p>
           </div>
         </div>
@@ -41,12 +41,14 @@
 
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-        <blockquote>
-          <p>{{successStory}}</p>
-          <footer>
-            {{author.name}} <span>{{author.title}}, {{author.authorCompany}}</span>
-          </footer>
-        </blockquote>
+        {{#each input}}
+        {{#each inputAns}}
+          <form>
+            <label>{{input}}</label>
+            <text>{{inputAns}}</text>
+          </form>
+        {{/each}}
+        {{/each}}
       </div>
     </div>
   </div>

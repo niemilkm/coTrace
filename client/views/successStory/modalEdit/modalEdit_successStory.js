@@ -241,11 +241,10 @@ Template.modalEdit_successStory.helpers({
       return "";
   },
 
-  successStorySelected: function()
-  {
-    return SuccessStorys.findOne({_id: Session.get("successStoryId")}).successStory;
-
-  },
+  // successStorySelected: function()
+  // {
+  //   return SuccessStories.findOne({_id: Session.get("successStoryId")}).successStory;
+  // },
 
   hidden_successStory: function()
   {

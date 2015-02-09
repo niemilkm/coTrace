@@ -16,21 +16,26 @@ Template.modalAdd_successStory.events =
 
   'click #addSuccessStoryDetails': function()
   {
-    var authorInfo               = true;
+    var authorInfo                = true;
     var executeSuccessStorySubmit = true;
-    var author                   = null;
-    var project                  = $('#projectName_modalSuccessStory').val().trim();
-    var successStory              = $('#successStory_modalSuccessStory').val().trim();
+    var author                    = null;
+    var project                   = $('#projectName_modalSuccessStory').val().trim();
+    //var successStory              = $('#successStory_modalSuccessStory').val().trim();
+    var successStoryName          = $('#successStoryName_modalSuccessStory').val().trim();
 
     if (project == "" || project == null || project == undefined)
     {
       alert("Please Enter Project Name");
       executeSuccessStorySubmit = false;
     }
-    else if (successStory == "" || successStory == null || successStory == undefined)
+    // else if (successStory == "" || successStory == null || successStory == undefined)
+    // {
+    //   alert("Please Enter SuccessStory");
+    //   executeSuccessStorySubmit = false;
+    // }
+    else if (successStoryName == "" || successStoryName == null || successStoryName == undefined)
     {
-      alert("Please Enter SuccessStory");
-      executeSuccessStorySubmit = false;
+      alert("Please Enter Success Story Name");
     }
     else
     {
@@ -89,16 +94,31 @@ Template.modalAdd_successStory.events =
 
       if (authorInfo && executeSuccessStorySubmit)
       {
+        //Find all success story input data before submitting to DB
+        var companyId = Companies.findOne({})._id;
+        var SSInputs = SuccessStoryInputs.find({company: companyId}).fetch();
+        var SSInputAns = [];
+        var SSInput = [];
+        var SSInputData;
+        _.each(SSInputs, function(SSInputData)
+        {
+          console.log("SSInputData._id: " + SSInputData._id);
+          SSInput[SSInputData.inputNum] = SSInputData.input;
+          SSInputAns[SSInputData.inputNum] = $('#' + SSInputData._id).val().trim();
+        });
 
+
+        //Submit to DB if already have Author\Contact Info
         if (Session.get("hidden_successStory"))
         {
           var successStoryDetails = {
                                 project: project,
                                 author: author,
-                                successStory: successStory
+                                SSInput: SSInput,
+                                SSInputAns: SSInputAns,
+                                SSName: successStoryName
                               };
           console.log("author Id after successStory details is: " + author);
-
           Meteor.call("insert_successStory", successStoryDetails)
           $('#projectName_modalSuccessStory').val('');
           $('#authorName_modalSuccessStory').val('');
@@ -111,6 +131,7 @@ Template.modalAdd_successStory.events =
           $('#authorEmailAdd_successStory').val('');
           $('#modalAdd_successStory').modal('hide');
         }
+        //Submit to DB with new Author\Contact information
         else
         {
           var authorDetails = {
@@ -125,7 +146,9 @@ Template.modalAdd_successStory.events =
             var successStoryDetails = {
                                 project: project,
                                 author: result,
-                                successStory: successStory
+                                SSInput: SSInput,
+                                SSInputAns: SSInputAns,
+                                SSName: successStoryName
                               };
             console.log("author Id after successStory details is: " + author);
 
@@ -133,7 +156,7 @@ Template.modalAdd_successStory.events =
             $('#projectName_modalSuccessStory').val('');
             $('#authorName_modalSuccessStory').val('');
             $('#authorCompany_modalSuccessStory').val('');
-            $('#successStory_modalSuccessStory').val('');
+            //$('#successStory_modalSuccessStory').val('');
             $('#authorNameAdd_successStory').val('');
             $('#authorCompanyAdd_modalSuccessStory').val('');
             $('#authorTitleAdd_successStory').val('');
@@ -153,7 +176,7 @@ Template.modalAdd_successStory.events =
     $('#projectName_modalSuccessStory').val('');
     $('#authorName_modalSuccessStory').val('');
     $('#authorCompany_modalSuccessStory').val('');
-    $('#successStory_modalSuccessStory').val('');
+    //$('#successStory_modalSuccessStory').val('');
     $('#authorNameAdd_successStory').val('');
     $('#authorCompanyAdd_modalSuccessStory').val('');
     $('#authorTitleAdd_successStory').val('');
@@ -216,8 +239,7 @@ Template.modalAdd_successStory.helpers({
   SSInput: function()
   {
     var companyId = Companies.findOne({})._id;
-    console.log("companyId:" + companyId)
-    return SuccessStoryInputs.find({company: companyId});
+    return SuccessStoryInputs.find({company: companyId}, {sort: {inputNum: 1}});
   },
 
   hidden_successStory: function()

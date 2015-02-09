@@ -2,13 +2,11 @@
 
   eachTestimonial: function()
   {
-    console.log("ran each Testimonial: " + this._id);
     return Testimonials.find({project: this._id});
   },
 
   eachSuccessStory: function()
   {
-    console.log("ran each Success Story: " + this._id);
     return SuccessStories.find({project: Session.get("projectId")});
   },
 

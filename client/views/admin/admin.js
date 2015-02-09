@@ -22,13 +22,12 @@ Template.admin.helpers({
 
   eachSSInput: function()
   {
-    return SuccessStoryInputs.find({});
+    return SuccessStoryInputs.find({}, {sort: {inputNum: 1}});
   },
 
   clientEditDelete: function()
   {
     var val = Session.get("editDelete"); // 0=none, 1=client, 2=author, 3=category, 4=tag, 5=ssInput
-    console.log("val is: " + val);
     if (val==1)
       return true;
     return false;
@@ -61,7 +60,6 @@ Template.admin.helpers({
   ssInputEditDelete: function()
   {
     var val = Session.get("editDelete"); // 0=none, 1=client, 2=author, 3=category, 4=tag, 5=ssInput
-    console.log("in ssInputEditDelete    " + val)
     if (val==5)
       return true;
     return false;
@@ -105,9 +103,10 @@ Template.admin.events =
 
   'click .editSSInput': function()
   {
-    var ssInputName = SuccessStoryInputs.findOne({_id: this._id}).input
+    var ssInput = SuccessStoryInputs.findOne({_id: this._id})
     Session.set("editSSInput", this._id);
-    $('#ssInputEdit').val( ssInputName );
+    $('#ssInputEdit').val( ssInput.input );
+    $('#ssInputNumEdit').val( ssInput.inputNum );
   },
 
   'click #editClientDetails': function()
@@ -137,8 +136,10 @@ Template.admin.events =
   'click #editSSInputDetails': function()
   {
     var ssInputName = $('#ssInputEdit').val().trim();
-    Meteor.call("update_ssInput", Session.get("editSSInput"), ssInputName);
+    var ssInputNum = $('#ssInputNumEdit').val().trim();
+    Meteor.call("update_ssInput", Session.get("editSSInput"), ssInputName, ssInputNum);
     $('#ssInputEdit').val('')
+    $('#ssInputNumEdit').val('')
     $('#adminModal_editSSInput').modal('hide');
   },
 
@@ -187,14 +188,16 @@ Template.admin.events =
   'click #ssInputAdd_submit': function()
   {
     var ssInput = $('#ssInputAdd').val().trim();
-    if (ssInput == "" || ssInput == null || ssInput == undefined)
+    var ssInputNum = $('#ssInputNumAdd').val().trim();
+    if (ssInput == "" || ssInput == null || ssInput == undefined || ssInputNum == "" || ssInputNum == null || ssInputNum == undefined)
     {
-      alert("To Add a Success Story Input - Please Enter the Input");
+      alert("To Add a Success Story Input - Please Enter the Input and Input Number");
     }
     else
     {
       $('#ssInputAdd').val('');
-      Meteor.call("insert_ssInput", ssInput);
+      $('#ssInputNumAdd').val('');
+      Meteor.call("insert_ssInput", ssInput, ssInputNum);
     }
   },
 

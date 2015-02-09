@@ -21,7 +21,19 @@
   project: function()
   {
     return Projects.findOne({_id: this.project});
-  }
+  },
+
+  // inputQues: function()
+  // {
+  //   var ss = SuccessStories.find({_id: this._id});
+  //   return ss.input;
+  // },
+
+  // inputAns: function()
+  // {
+  //   var ss = SuccessStories.find({_id: this._id});
+  //   return ss.inputAns;
+  // }
 
 
 });

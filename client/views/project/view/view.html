@@ -44,11 +44,15 @@
           <div class="panel panel-default">
             <div class="panel-heading">
               <h3 class="panel-title">
-                {{author.name}} <small>{{author.title}}</small>
+                {{name}}
               </h3>
             </div>
             <div class="panel-body">
-              {{successStory}}
+              {{#each inputAns}}
+                <form>
+                  {{this}}
+                </form>
+              {{/each}}
             </div>
             <div class="panel-footer">
               Success Story<a href="/successStory/view/{{_id}}" class="pull-right"><small>View Success Story <i class="fa fa-angle-right"></i></small></a>

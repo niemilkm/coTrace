@@ -15,7 +15,7 @@
     
     <div class="page-header-actions">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
           {{#if clientEditDelete}}
             <div class="headerTitle">
               <h3>Clients</h3>
@@ -134,11 +134,19 @@
               <h3>Success Story Inputs</h3>
             </div>
             <div class="row">
+              <div class="col-md-2">
+                <input id="ssInputNumAdd" type="number" class="form-control" placeholder="#" min="1" max="5000">
+              </div>
               <div class="col-md-10">
-                <input id="ssInputAdd" type="text" class="form-control">
-                <p><button id="ssInputAdd_submit" type="submit" class="pull-right btn btn-blue btn-sm"> <i class=" fa fa-plus"> Add Input</i></button></p><br><br>
+                <input id="ssInputAdd" type="text" class="form-control" placeholder="Success Story Input">
               </div>
             </div>
+            <div class="row">
+              <div class="col-md-12">
+                <button id="ssInputAdd_submit" type="submit" class="pull-right btn btn-blue btn-sm"> <i class=" fa fa-plus"> Add Input</i></button><br><br>
+              </div>
+            </div>
+            <br>
             <ul>
             {{#each eachSSInput}}
             <li><div class="row">
@@ -148,7 +156,10 @@
               <div class="col-md-2">
                 <button class="btn btn-blue btn-xs editSSInput" data-toggle="modal" data-target="#adminModal_editSSInput" data-id="{{_id}}"><i class="fa fa-edit icon-large"></i> Edit</button>
               </div>
-              <div class="col-md-8">
+              <div class="col-md-1">
+                <p>{{inputNum}}</p>
+              </div>
+              <div class="col-md-7">
                 <p>{{input}}</p>
               </div>
             </div></li>
