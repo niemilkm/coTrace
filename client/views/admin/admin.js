@@ -112,7 +112,7 @@ Template.admin.events =
   {
     var index = $(this)[0].index;
     var ssInput = SuccessStoryInputs.findOne({}).inputs;
-    //Session.set("editSSInput", this._id);
+    Session.set("editSSInput", index);
     $('#ssInputEdit').val( ssInput[index].ques );
     $('#ssInputNumEdit').val( ssInput[index].num );
   },
@@ -145,7 +145,8 @@ Template.admin.events =
   {
     var ssInputName = $('#ssInputEdit').val().trim();
     var ssInputNum = $('#ssInputNumEdit').val().trim();
-    Meteor.call("update_ssInput", ssInputName, ssInputNum);
+    var ssMap = {num: ssInputNum, ques: ssInputName};
+    Meteor.call("update_ssInput", ssMap, Session.get("editSSInput"));
     $('#ssInputEdit').val('')
     $('#ssInputNumEdit').val('')
     $('#adminModal_editSSInput').modal('hide');
@@ -205,27 +206,23 @@ Template.admin.events =
     }
     else
     {
-      if (SuccessStoryInputs.find({}).count() > 0)
+      Meteor.call("insert_ssInput", ssMap, ssInputNum, function(error,result)
       {
-        console.log("value wooo: " + SuccessStoryInputs.find({'inputs.num': ssInputNum}).count());
-        if (SuccessStoryInputs.find({'inputs.num': ssInputNum}).count() == 0)
+        console.log(result);
+        switch(result)
         {
-          Meteor.call("add_ssInput", ssMap)
-          $('#ssInputAdd').val('');
-          $('#ssInputNumAdd').val('');
+          case 1:
+            alert("Question Number Already Used, Please Change the Question Number or Edit the Question Number on an Existing Question");
+            break;
+          case 2:
+            $('#ssInputAdd').val('');
+            $('#ssInputNumAdd').val('');
+            break;
+          default:
+            alert("unknown error - unsuccessful attempt to add success story input");
+            break;
         }
-        else
-          alert("Question Number Already Used, Please Change the Question Number or Edit the Question Number on an Existing Question");
-      }
-      else
-      {
-        Meteor.call("insert_ssInput", function(error, result) {
-          if (!error)
-            Meteor.call("add_ssInput", ssMap)
-        });
-        $('#ssInputAdd').val('');
-        $('#ssInputNumAdd').val('');
-      }
+      });
     }
   },
 
