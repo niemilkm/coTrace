@@ -96,16 +96,18 @@ Template.modalAdd_successStory.events =
       {
         //Find all success story input data before submitting to DB
         var companyId = Companies.findOne({})._id;
-        var SSInputs = SuccessStoryInputs.find({company: companyId}).fetch();
-        var SSInputAns = [];
-        var SSInput = [];
-        var SSInputData;
-        _.each(SSInputs, function(SSInputData)
-        {
-          console.log("SSInputData._id: " + SSInputData._id);
-          SSInput[SSInputData.inputNum] = SSInputData.input;
-          SSInputAns[SSInputData.inputNum] = $('#' + SSInputData._id).val().trim();
-        });
+        // var SSInputs = SuccessStoryInputs.find({company: companyId}).fetch();
+        // var SSInputAns = [];
+        // var SSInput = [];
+        // var SSInputData;
+        // _.each(SSInputs, function(SSInputData)
+        // {
+        //   console.log("SSInputData._id: " + SSInputData._id);
+        //   SSInput[SSInputData.inputNum] = SSInputData.input;
+        //   SSInputAns[SSInputData.inputNum] = $('#' + SSInputData._id).val().trim();
+        // });
+
+        
 
 
         //Submit to DB if already have Author\Contact Info

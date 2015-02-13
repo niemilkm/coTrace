@@ -154,13 +154,13 @@
                 <button class="btn btn-blue btn-xs deleteSSInput" data-toggle="modal" data-target="#adminModal_deleteSSInput" data-id="{{_id}}"><i class="fa fa-trash-o icon-large"></i> Delete</button>
               </div>
               <div class="col-md-2">
-                <button class="btn btn-blue btn-xs editSSInput" data-toggle="modal" data-target="#adminModal_editSSInput" data-id="{{_id}}"><i class="fa fa-edit icon-large"></i> Edit</button>
+                <button class="btn btn-blue btn-xs editSSInput" data-toggle="modal" data-target="#adminModal_editSSInput" data-id="{{index}}"><i class="fa fa-edit icon-large"></i> Edit</button>
               </div>
               <div class="col-md-1">
-                <p>{{inputNum}}</p>
+                <p>{{ss.num}}</p>
               </div>
               <div class="col-md-7">
-                <p>{{input}}</p>
+                <p>{{ss.ques}}</p>
               </div>
             </div></li>
             {{/each}}

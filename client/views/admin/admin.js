@@ -22,7 +22,14 @@ Template.admin.helpers({
 
   eachSSInput: function()
   {
-    return SuccessStoryInputs.find({}, {sort: {inputNum: 1}});
+    var ss = SuccessStoryInputs.findOne({}).inputs;
+    var ss
+    var array = [];
+    for (var i=0; i<ss.length; i++)
+    {
+      array.push({ss: ss[i], index: i});
+    }
+    return array;
   },
 
   clientEditDelete: function()
@@ -103,10 +110,11 @@ Template.admin.events =
 
   'click .editSSInput': function()
   {
-    var ssInput = SuccessStoryInputs.findOne({_id: this._id})
-    Session.set("editSSInput", this._id);
-    $('#ssInputEdit').val( ssInput.input );
-    $('#ssInputNumEdit').val( ssInput.inputNum );
+    var index = $(this)[0].index;
+    var ssInput = SuccessStoryInputs.findOne({}).inputs;
+    //Session.set("editSSInput", this._id);
+    $('#ssInputEdit').val( ssInput[index].ques );
+    $('#ssInputNumEdit').val( ssInput[index].num );
   },
 
   'click #editClientDetails': function()
@@ -137,7 +145,7 @@ Template.admin.events =
   {
     var ssInputName = $('#ssInputEdit').val().trim();
     var ssInputNum = $('#ssInputNumEdit').val().trim();
-    Meteor.call("update_ssInput", Session.get("editSSInput"), ssInputName, ssInputNum);
+    Meteor.call("update_ssInput", ssInputName, ssInputNum);
     $('#ssInputEdit').val('')
     $('#ssInputNumEdit').val('')
     $('#adminModal_editSSInput').modal('hide');
@@ -189,15 +197,35 @@ Template.admin.events =
   {
     var ssInput = $('#ssInputAdd').val().trim();
     var ssInputNum = $('#ssInputNumAdd').val().trim();
+    var ssMap = {num: ssInputNum, ques: ssInput};
+    console.log("ssMap: " + ssMap.num + " " + ssMap.ques);
     if (ssInput == "" || ssInput == null || ssInput == undefined || ssInputNum == "" || ssInputNum == null || ssInputNum == undefined)
     {
       alert("To Add a Success Story Input - Please Enter the Input and Input Number");
     }
     else
     {
-      $('#ssInputAdd').val('');
-      $('#ssInputNumAdd').val('');
-      Meteor.call("insert_ssInput", ssInput, ssInputNum);
+      if (SuccessStoryInputs.find({}).count() > 0)
+      {
+        console.log("value wooo: " + SuccessStoryInputs.find({'inputs.num': ssInputNum}).count());
+        if (SuccessStoryInputs.find({'inputs.num': ssInputNum}).count() == 0)
+        {
+          Meteor.call("add_ssInput", ssMap)
+          $('#ssInputAdd').val('');
+          $('#ssInputNumAdd').val('');
+        }
+        else
+          alert("Question Number Already Used, Please Change the Question Number or Edit the Question Number on an Existing Question");
+      }
+      else
+      {
+        Meteor.call("insert_ssInput", function(error, result) {
+          if (!error)
+            Meteor.call("add_ssInput", ssMap)
+        });
+        $('#ssInputAdd').val('');
+        $('#ssInputNumAdd').val('');
+      }
     }
   },
 

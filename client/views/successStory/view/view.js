@@ -35,5 +35,32 @@
   //   return ss.inputAns;
   // }
 
+  inputTest: function()
+  {
+
+    var returnArray = [];
+    var count = 0;
+    console.log("SS ID: " + this._id);
+    var SS = SuccessStories.find({_id: this._id}).fetch();
+    _.each(SS, function(SSData)
+    {
+      console.log("ques & ans:" + SSData.input + " & " + SSData.inputAns);
+      if (count != 0)
+        returnArray.push({question:SSData.input, answer:SSData.inputAns})
+    });
+
+    console.log("returnArray: " + returnArray);
+
+    return returnArray;
+
+
+    // var object = [
+    //                   {question: "1o", answer: "one"},
+    //                   {question: "2", answer: "two"},
+    //                   {question: "3", answer: "three"}
+    //               ];
+    // return object;
+  }
+
 
 });

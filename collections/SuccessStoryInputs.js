@@ -1,9 +1,14 @@
 SuccessStoryInputs = new Meteor.Collection('successStoryInput');
 
 Meteor.methods({
-	insert_ssInput: function(input, inputNum) {
+	insert_ssInput: function() {
 		var companyId = Companies.findOne({})._id;
-		SuccessStoryInputs.insert({input: input, inputNum: inputNum, company: companyId, dateAdded: moment.utc(), dateUpdated: moment.utc()});
+		return SuccessStoryInputs.insert({company: companyId, dateAdded: moment.utc(), dateUpdated: moment.utc()});
+	},
+
+	add_ssInput: function(map) {
+		var companyId = Companies.findOne({})._id;
+		SuccessStoryInputs.update({company: companyId}, {$push: {inputs: map}});
 	},
 
 	update_ssInput: function(ssInputId, input, inputNum) {

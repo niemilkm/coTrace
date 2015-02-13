@@ -41,13 +41,11 @@
 
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-        {{#each input}}
-        {{#each inputAns}}
+        {{#each inputTest}}
           <form>
-            <label>{{input}}</label>
-            <text>{{inputAns}}</text>
+            <label>{{question}}</label>
+            <p>{{answer}}</p>
           </form>
-        {{/each}}
         {{/each}}
       </div>
     </div>
