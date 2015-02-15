@@ -23,12 +23,20 @@ Template.admin.helpers({
   eachSSInput: function()
   {
     var ss = SuccessStoryInputs.findOne({}).inputs;
-    var ss
     var array = [];
     for (var i=0; i<ss.length; i++)
     {
-      array.push({ss: ss[i], index: i});
+      //array.push({ss: ss[i], index: i});
+      array.push({ss_num: parseInt(ss[i].num), ss_ques: ss[i].ques, index: i});
     }
+    array.sort(function(a,b) {
+      if(a.ss_num > b.ss_num)
+        return 1;
+      else if (a.ss_num < b.ss_num)
+        return -1;
+      else
+        return 0;
+    });
     return array;
   },
 
@@ -108,13 +116,22 @@ Template.admin.events =
     $('#tagEdit').val( tagName );
   },
 
-  'click .editSSInput': function()
+  'click .editSSInputNum': function()
   {
     var index = $(this)[0].index;
     var ssInput = SuccessStoryInputs.findOne({}).inputs;
     Session.set("editSSInput", index);
-    $('#ssInputEdit').val( ssInput[index].ques );
-    $('#ssInputNumEdit').val( ssInput[index].num );
+    $('#ssInputEditNum').val( ssInput[index].ques );
+    $('#ssInputNumEditNum').val( ssInput[index].num );
+  },
+
+  'click .editSSInputQues': function()
+  {
+    var index = $(this)[0].index;
+    var ssInput = SuccessStoryInputs.findOne({}).inputs;
+    Session.set("editSSInput", index);
+    $('#ssInputEditQues').val( ssInput[index].ques );
+    $('#ssInputNumEditQues').val( ssInput[index].num );
   },
 
   'click #editClientDetails': function()
@@ -141,15 +158,26 @@ Template.admin.events =
     $('#adminModal_editTag').modal('hide');
   },
 
-  'click #editSSInputDetails': function()
+  'click #editSSInputDetailsNum': function()
   {
-    var ssInputName = $('#ssInputEdit').val().trim();
-    var ssInputNum = $('#ssInputNumEdit').val().trim();
+    var ssInputName = $('#ssInputEditNum').val().trim();
+    var ssInputNum = $('#ssInputNumEditNum').val().trim();
     var ssMap = {num: ssInputNum, ques: ssInputName};
-    Meteor.call("update_ssInput", ssMap, Session.get("editSSInput"));
-    $('#ssInputEdit').val('')
-    $('#ssInputNumEdit').val('')
-    $('#adminModal_editSSInput').modal('hide');
+    Meteor.call("update_ssInputNum", ssMap, Session.get("editSSInput"));
+    $('#ssInputEditNum').val('')
+    $('#ssInputNumEditNum').val('')
+    $('#adminModal_editSSInputNum').modal('hide');
+  },
+
+  'click #editSSInputDetailsQues': function()
+  {
+    var ssInputName = $('#ssInputEditQues').val().trim();
+    var ssInputNum = $('#ssInputNumEditQues').val().trim();
+    var ssMap = {num: ssInputNum, ques: ssInputName};
+    Meteor.call("update_ssInputQues", ssMap, Session.get("editSSInput"));
+    $('#ssInputEditQues').val('')
+    $('#ssInputNumEditQues').val('')
+    $('#adminModal_editSSInputQues').modal('hide');
   },
 
   'click #clientAdd_submit': function()
@@ -206,7 +234,7 @@ Template.admin.events =
     }
     else
     {
-      Meteor.call("insert_ssInput", ssMap, ssInputNum, function(error,result)
+      Meteor.call("insert_ssInput", ssMap, function(error,result)
       {
         console.log(result);
         switch(result)
@@ -215,8 +243,15 @@ Template.admin.events =
             alert("Question Number Already Used, Please Change the Question Number or Edit the Question Number on an Existing Question");
             break;
           case 2:
+          case 4:
             $('#ssInputAdd').val('');
             $('#ssInputNumAdd').val('');
+            break;
+          case 3:
+            alert("Question Already Used, Please Change the Question or Edit the Question on an Existing Question");
+            break;
+          case 5:
+            alert("Both Question Number and Question are already used. Please Add a Different Question or Update an Existing Question");
             break;
           default:
             alert("unknown error - unsuccessful attempt to add success story input");
