@@ -27,7 +27,7 @@ Template.admin.helpers({
     for (var i=0; i<ss.length; i++)
     {
       //array.push({ss: ss[i], index: i});
-      array.push({ss_num: parseInt(ss[i].num), ss_ques: ss[i].ques, index: i});
+      array.push({ss_num: parseInt(ss[i].num), ss_ques: ss[i].ques, ss_index: ss[i].index});
     }
     array.sort(function(a,b) {
       if(a.ss_num > b.ss_num)
@@ -116,18 +116,18 @@ Template.admin.events =
     $('#tagEdit').val( tagName );
   },
 
-  'click .editSSInputNum': function()
+  'click .editSSInput': function()
   {
-    var index = $(this)[0].index;
+    var index = this.ss_index;
     var ssInput = SuccessStoryInputs.findOne({}).inputs;
     Session.set("editSSInput", index);
-    $('#ssInputEditNum').val( ssInput[index].ques );
-    $('#ssInputNumEditNum').val( ssInput[index].num );
+    $('#ssInputEdit').val( ssInput[index].ques );
+    $('#ssInputNumEdit').val( ssInput[index].num );
   },
 
   'click .editSSInputQues': function()
   {
-    var index = $(this)[0].index;
+    var index = this.ss_index;
     var ssInput = SuccessStoryInputs.findOne({}).inputs;
     Session.set("editSSInput", index);
     $('#ssInputEditQues').val( ssInput[index].ques );
@@ -158,26 +158,34 @@ Template.admin.events =
     $('#adminModal_editTag').modal('hide');
   },
 
-  'click #editSSInputDetailsNum': function()
+  'click #editSSInputDetails': function()
   {
-    var ssInputName = $('#ssInputEditNum').val().trim();
-    var ssInputNum = $('#ssInputNumEditNum').val().trim();
+    var ssInputName = $('#ssInputEdit').val().trim();
+    var ssInputNum = $('#ssInputNumEdit').val().trim();
     var ssMap = {num: ssInputNum, ques: ssInputName};
-    Meteor.call("update_ssInputNum", ssMap, Session.get("editSSInput"));
-    $('#ssInputEditNum').val('')
-    $('#ssInputNumEditNum').val('')
-    $('#adminModal_editSSInputNum').modal('hide');
-  },
-
-  'click #editSSInputDetailsQues': function()
-  {
-    var ssInputName = $('#ssInputEditQues').val().trim();
-    var ssInputNum = $('#ssInputNumEditQues').val().trim();
-    var ssMap = {num: ssInputNum, ques: ssInputName};
-    Meteor.call("update_ssInputQues", ssMap, Session.get("editSSInput"));
-    $('#ssInputEditQues').val('')
-    $('#ssInputNumEditQues').val('')
-    $('#adminModal_editSSInputQues').modal('hide');
+    Meteor.call("update_ssInputNum", ssMap, Session.get("editSSInput"), function(error, result) {
+      switch(result)
+      {
+        case 1:
+          alert("Question Number Already Used, Please Change the Question Number or Edit the Question Number on an Existing Question");
+          break;
+        case 2:
+        case 4:
+          $('#ssInputEdit').val('');
+          $('#ssInputNumEdit').val('');
+          $('#adminModal_editSSInput').modal('hide');
+          break;
+        case 3:
+          alert("Question Already Used, Please Change the Question or Edit the Question on an Existing Question");
+          break;
+        case 5:
+          alert("Both Question Number and Question are already used. Please Add a Different Question or Update an Existing Question");
+          break;
+        default:
+          alert("unknown error - unsuccessful attempt to add success story input");
+          break;
+      }
+    });
   },
 
   'click #clientAdd_submit': function()
@@ -236,7 +244,6 @@ Template.admin.events =
     {
       Meteor.call("insert_ssInput", ssMap, function(error,result)
       {
-        console.log(result);
         switch(result)
         {
           case 1:
@@ -397,14 +404,15 @@ Template.admin.events =
 
   'click .deleteSSInput': function()
   {
-    var SSInputId = this._id;
-    //console.log("HEREEEEE: " + SSInputId);
-    //Session.set("deleteSSInput", SSInputId);
-    //ssInputName = SuccessStoryInputs.findOne({_id: ssInputId}).input;
-    //Session.set("ssInputName_deleteSSInput", ssInputName);
-    Session.set("ssInputToDelete_id", SSInputId);
+    // var SSInputId = this._id;
+    // Session.set("ssInputToDelete_id", SSInputId);
 
-    console.log("done .deleteSSInput");
+    // console.log("done .deleteSSInput");
+    var index = $(this)[0].index;
+    var ssInput = SuccessStoryInputs.findOne({}).inputs;
+    Session.set("editSSInput", index);
+    $('#ssInputEditQues').val( ssInput[index].ques );
+    $('#ssInputNumEditQues').val( ssInput[index].num );
   },
 
   'click .clientEdit': function() {

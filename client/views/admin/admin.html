@@ -151,25 +151,21 @@
             {{#each eachSSInput}}
             <li><div class="row">
               <div class="col-md-2">
-                <button class="btn btn-blue btn-xs deleteSSInput" data-toggle="modal" data-target="#adminModal_deleteSSInput" data-id="{{_id}}"><i class="fa fa-trash-o icon-large"></i> Delete</button>
+                <button class="btn btn-blue btn-xs deleteSSInput" data-toggle="modal" data-target="#adminModal_deleteSSInput" data-id="{{ss_index}}"><i class="fa fa-trash-o icon-large"></i> Delete</button>
               </div>
               <div class="col-md-2">
-                <button class="btn btn-blue btn-xs editSSInputNum" data-toggle="modal" data-target="#adminModal_editSSInputNum" data-id="{{index}}"><i class="fa fa-edit icon-large"></i> Edit #</button>
-              </div>
-              <div class="col-md-2">
-                <button class="btn btn-blue btn-xs editSSInputQues" data-toggle="modal" data-target="#adminModal_editSSInputQues" data-id="{{index}}"><i class="fa fa-edit icon-large"></i> Edit Input</button>
+                <button class="btn btn-blue btn-xs editSSInput" data-toggle="modal" data-target="#adminModal_editSSInput" data-id="{{ss_index}}"><i class="fa fa-edit icon-large"></i> Edit</button>
               </div>
               <div class="col-md-1">
                 <p>{{ss_num}}</p>
               </div>
-              <div class="col-md-5">
+              <div class="col-md-7">
                 <p>{{ss_ques}}</p>
               </div>
             </div></li>
             {{/each}}
             </ul>
-            {{> adminModal_editSSInputNum}}
-            {{> adminModal_editSSInputQues}}
+            {{> adminModal_editSSInput}}
             {{> adminModal_deleteSSInput}}
           {{/if}}
         </div>
