@@ -22,22 +22,26 @@ Template.admin.helpers({
 
   eachSSInput: function()
   {
-    var ss = SuccessStoryInputs.findOne({}).inputs;
-    var array = [];
-    for (var i=0; i<ss.length; i++)
+    if (SuccessStoryInputs.findOne({}) != undefined)
     {
-      //array.push({ss: ss[i], index: i});
-      array.push({ss_num: parseInt(ss[i].num), ss_ques: ss[i].ques, ss_index: ss[i].index});
+      var ss = SuccessStoryInputs.findOne({}).inputs;
+      var array = [];
+      for (var i=0; i<ss.length; i++)
+      {
+        //array.push({ss: ss[i], index: i});
+        array.push({ss_num: parseInt(ss[i].num), ss_ques: ss[i].ques, ss_index: ss[i].index});
+      }
+      array.sort(function(a,b) {
+        if(a.ss_num > b.ss_num)
+          return 1;
+        else if (a.ss_num < b.ss_num)
+          return -1;
+        else
+          return 0;
+      });
+      return array;
     }
-    array.sort(function(a,b) {
-      if(a.ss_num > b.ss_num)
-        return 1;
-      else if (a.ss_num < b.ss_num)
-        return -1;
-      else
-        return 0;
-    });
-    return array;
+    return;
   },
 
   clientEditDelete: function()
@@ -173,6 +177,8 @@ Template.admin.events =
         case 4:
           $('#ssInputEdit').val('');
           $('#ssInputNumEdit').val('');
+          $('#ssInputNumAdd').val('');
+          $('#ssInputAdd').val('');
           $('#adminModal_editSSInput').modal('hide');
           break;
         case 3:
@@ -404,15 +410,8 @@ Template.admin.events =
 
   'click .deleteSSInput': function()
   {
-    // var SSInputId = this._id;
-    // Session.set("ssInputToDelete_id", SSInputId);
-
-    // console.log("done .deleteSSInput");
-    var index = $(this)[0].index;
-    var ssInput = SuccessStoryInputs.findOne({}).inputs;
-    Session.set("editSSInput", index);
-    $('#ssInputEditQues').val( ssInput[index].ques );
-    $('#ssInputNumEditQues').val( ssInput[index].num );
+    var ss = this;
+    Session.set("editSSInput", ss);
   },
 
   'click .clientEdit': function() {

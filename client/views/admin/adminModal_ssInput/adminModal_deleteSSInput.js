@@ -1,11 +1,14 @@
 Template.adminModal_deleteSSInput.helpers({
 
-  ssInputName_deleteSSInput: function()
+  ss: function()
   {
-    var ssInputId = Session.get("ssInputToDelete_id");
-    console.log("ssInputId: " + ssInputId);
-    if (ssInputId != undefined && ssInputId != null)
-      return SuccessStoryInputs.findOne({_id: Session.get("ssInputToDelete_id")}).input;
+    if (Session.get("editSSInput") != undefined)
+    {
+      var instance = Session.get("editSSInput");
+      var array = [{ss_num: instance.ss_num, ss_ques: instance.ss_ques}];
+      return array;
+    }
+    return;
   },
 
 
@@ -15,7 +18,7 @@ Template.adminModal_deleteSSInput.events =
 {
   'click #deleteSSInput': function()
   {
-    Meteor.call("remove_ssInput", Session.get("ssInputToDelete_id"));
+    Meteor.call("remove_ssInput", Session.get("editSSInput").ss_index);
     $('#adminModal_deleteSSInput').modal('hide');
   }
 }

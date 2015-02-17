@@ -11,7 +11,9 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-md-12">
-              <p>Success Story Input, <strong>{{ssInputName_deleteSSInput}}</strong>, will be deleted.</p>
+              {{#each ss}}
+              <p>Success Story Input, <strong>{{ss_num}} - {{ss_ques}}</strong>, will be deleted.</p>
+              {{/each}}
             </div>
           </div>
         </div>

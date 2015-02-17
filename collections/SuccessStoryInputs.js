@@ -30,7 +30,7 @@ Meteor.methods({
 		var numOk = false;
 		var quesOk = false;
 
-		if (SuccessStoryInputs.findOne({}) != 0)
+		if (SuccessStoryInputs.findOne({}) != undefined)
     {
     	var numCount = SuccessStoryInputs.findOne({'inputs.num': map.num});
     	var quesCount = SuccessStoryInputs.findOne({'inputs.ques': map.ques});
@@ -67,6 +67,7 @@ Meteor.methods({
 	insert_ssInput: function(map) {
 		var result = Meteor.call("validate_ssInput", map);
 		var companyId = Companies.findOne({})._id;
+		console.log(result);
 
 
 		if (result == 2)
@@ -77,7 +78,7 @@ Meteor.methods({
 		}
     else if (result == 4)
     {
-    	var map_index = {num:map.num, ques:map.ques, index:0};
+    	var map_index = [{num:map.num, ques:map.ques, index:0}];
       SuccessStoryInputs.insert({inputs: map_index, company: companyId, dateAdded: moment.utc(), dateUpdated: moment.utc()});
     }
 
@@ -123,8 +124,8 @@ Meteor.methods({
 		return result;
 	},
 
-	remove_ssInput: function(ssInputId) {
-		SuccessStoryInputs.remove({_id: ssInputId});
+	remove_ssInput: function(ssInputIndex) {
+		SuccessStoryInputs.update({}, {$pull: {inputs: {index: ssInputIndex}}});
 	}
 	
 });
