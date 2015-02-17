@@ -7,13 +7,11 @@
 
   testimonialCount: function()
   {
-    console.log("project id (testimonial): " + this._id + " - " + Testimonials.find({project: this._id}).count());
     return Testimonials.find({project: this._id}).count();
   },
 
   successStoryCount: function()
   {
-    console.log("project id (successStory: " + this._id + " - " + SuccessStories.find({project: this._id}).count());
     return SuccessStories.find({project: this._id}).count();
   },
 

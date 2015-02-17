@@ -240,8 +240,27 @@ Template.modalAdd_successStory.helpers({
 
   SSInput: function()
   {
-    var companyId = Companies.findOne({})._id;
-    return SuccessStoryInputs.find({company: companyId}, {sort: {inputNum: 1}});
+    if (SuccessStoryInputs.findOne({}) != undefined)
+    {
+      var array = [];
+      var ss = SuccessStoryInputs.findOne({}).inputs;
+      ss.sort(function(a,b)
+      {
+        var a_ss_num_int = parseInt(a.num);
+        var b_ss_num_int = parseInt(b.num);
+        if(a_ss_num_int > b_ss_num_int)
+          return 1;
+        else if (a_ss_num_int < b_ss_num_int)
+          return -1;
+        else
+          return 0;
+      });
+      _.each(ss, function(ssData) {
+        array.push(ssData);
+      });
+      return array;
+    }
+    return;
   },
 
   hidden_successStory: function()
