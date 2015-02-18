@@ -240,7 +240,7 @@ Template.admin.events =
   {
     var ssInput = $('#ssInputAdd').val().trim();
     var ssInputNum = $('#ssInputNumAdd').val().trim();
-    var ssMap = {num: ssInputNum, ques: ssInput};
+    var ssMap = {num: Number(ssInputNum), ques: ssInput};
     console.log("ssMap: " + ssMap.num + " " + ssMap.ques);
     if (ssInput == "" || ssInput == null || ssInput == undefined || ssInputNum == "" || ssInputNum == null || ssInputNum == undefined)
     {

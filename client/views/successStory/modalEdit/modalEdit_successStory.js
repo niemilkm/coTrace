@@ -225,7 +225,7 @@ Template.modalEdit_successStory.helpers({
 
   projectSelected: function()
   {
-    var projectId = SuccessStorys.findOne({_id: Session.get("successStoryId")}).project;
+    var projectId = SuccessStories.findOne({_id: Session.get("successStoryId")}).project;
     if (projectId == this._id)
       return "selected";
     else
@@ -234,7 +234,7 @@ Template.modalEdit_successStory.helpers({
 
   authorSelected: function()
   {
-    var authorId = SuccessStorys.findOne({_id: Session.get("successStoryId")}).author;
+    var authorId = SuccessStories.findOne({_id: Session.get("successStoryId")}).author;
     if (authorId == this._id)
       return "selected";
     else
