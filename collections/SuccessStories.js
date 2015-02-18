@@ -3,12 +3,12 @@ SuccessStories = new Meteor.Collection('successStory');
 Meteor.methods({
 	insert_successStory: function(td) {
 		var companyId = Companies.findOne({})._id;
-		var SS_id = SuccessStories.insert({name: td.SSName, input: td.SSInput, inputAns: td.SSInputAns, project: td.project, author: td.author, company: companyId, dateAdded: moment.utc(), dateUpdated: moment.utc()});
+		var SS_id = SuccessStories.insert({name: td.SSName, SSInputs: td.SSInputs, project: td.project, author: td.author, company: companyId, dateAdded: moment.utc(), dateUpdated: moment.utc()});
 		console.log("success story inserted");
 	},
 
 	update_successStory: function(td, td_id) {
-		SuccessStories.update({_id: td_id}, {$set: {name: td.SSName, input: td.SSInput, inputAns: td.SSInputAns, project: td.project, author: td.author, dateUpdated: moment.utc()}});
+		SuccessStories.update({_id: td_id}, {$set: {name: td.SSName, SSInput: td.SSInputs, project: td.project, author: td.author, dateUpdated: moment.utc()}});
 		console.log("success story updated");
 	},
 

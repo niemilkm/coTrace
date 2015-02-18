@@ -14,6 +14,22 @@ Template.modalAdd_successStory.events =
     $('.authorSelect').hide();
   },
 
+  // 'click #addSuccessStoryDetails': function()
+  // {
+  //   //var companyId = Companies.findOne({})._id;
+  //   var ssInputs = SuccessStoryInputs.findOne({}).inputs;
+  //   var array = [];
+  //   _.each(ssInputs, function(data)
+  //   {
+  //     var index = data.index;
+  //     var jquery = "ans_" + index;
+  //     var ans = $('#' + jquery).val();
+  //     array.push({ssInputs: data, ans: ans});
+  //   });
+
+  //   console.log(array);
+  // },
+
   'click #addSuccessStoryDetails': function()
   {
     var authorInfo                = true;
@@ -96,19 +112,16 @@ Template.modalAdd_successStory.events =
       {
         //Find all success story input data before submitting to DB
         var companyId = Companies.findOne({})._id;
-        // var SSInputs = SuccessStoryInputs.find({company: companyId}).fetch();
-        // var SSInputAns = [];
-        // var SSInput = [];
-        // var SSInputData;
-        // _.each(SSInputs, function(SSInputData)
-        // {
-        //   console.log("SSInputData._id: " + SSInputData._id);
-        //   SSInput[SSInputData.inputNum] = SSInputData.input;
-        //   SSInputAns[SSInputData.inputNum] = $('#' + SSInputData._id).val().trim();
-        // });
-
-        
-
+        var ssInputs = SuccessStoryInputs.findOne({}).inputs;
+        var array = [];
+        _.each(ssInputs, function(data)
+        {
+          var index = data.index;
+          var jquery = "ans_" + index;
+          var ans = $('#' + jquery).val();
+          array.push({ssInputs: data, ans: ans});
+          $('#' + jquery).val('');
+        });
 
         //Submit to DB if already have Author\Contact Info
         if (Session.get("hidden_successStory"))
@@ -116,8 +129,7 @@ Template.modalAdd_successStory.events =
           var successStoryDetails = {
                                 project: project,
                                 author: author,
-                                SSInput: SSInput,
-                                SSInputAns: SSInputAns,
+                                SSInputs: array,
                                 SSName: successStoryName
                               };
           console.log("author Id after successStory details is: " + author);
@@ -148,8 +160,7 @@ Template.modalAdd_successStory.events =
             var successStoryDetails = {
                                 project: project,
                                 author: result,
-                                SSInput: SSInput,
-                                SSInputAns: SSInputAns,
+                                SSInputs: array,
                                 SSName: successStoryName
                               };
             console.log("author Id after successStory details is: " + author);
