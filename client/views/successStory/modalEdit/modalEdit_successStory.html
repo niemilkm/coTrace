@@ -4,18 +4,18 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close closeModal" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <button type="button" id="closeModal" class="close closeModal" data-dismiss="modal" aria-hidden="true">&times;</button>
           <h4 class="modal-title" id="myModalLabel">Edit Success Story</h4>
         </div>
         <div class="modal-body">
           <div class="row">
             {{#if hidden_successStory}}
               <div class="col-md-2 right-arrow-div">
-                <p>Add Author <i class="fa fa-chevron-right right-arrow"></i></p>
+                <p>Add Contact <i class="fa fa-chevron-right right-arrow"></i></p>
               </div>
             {{else}}
               <div class="col-md-4 left-arrow-div">
-                <p>Add Author <i class="fa fa-chevron-left left-arrow"></i></p>
+                <p>Add Contact <i class="fa fa-chevron-left left-arrow"></i></p>
                 {{> sideBar_addAuthor}}
               </div>
             {{/if}}
@@ -41,18 +41,20 @@
                     </select>
                   </div>
                 </div>
+                {{#each SSInput}}
                 <div class="row">
                   <div class="form-group col-md-12">
-                    <label>SuccessStory</label>
-                    <textarea id="successStory_modalSuccessStory" class="form-control" rows="8">{{successStorySelected}}</textarea>
+                    <label>{{ques}}</label>
+                    <textarea id="ans_{{index}}" class="form-control" rows="4">{{ans}}</textarea>
                   </div>
                 </div>
+                {{/each}}
               </form>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default modalClose" data-dismiss="modal">Cancel</button>
+          <button type="button" id="closeModal" class="btn btn-default closeModal">Cancel</button>
           <button type="button" id="addSuccessStoryDetails" class="btn btn-primary">Update</button>
         </div>
       </div>

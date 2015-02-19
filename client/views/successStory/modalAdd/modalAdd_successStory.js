@@ -14,22 +14,6 @@ Template.modalAdd_successStory.events =
     $('.authorSelect').hide();
   },
 
-  // 'click #addSuccessStoryDetails': function()
-  // {
-  //   //var companyId = Companies.findOne({})._id;
-  //   var ssInputs = SuccessStoryInputs.findOne({}).inputs;
-  //   var array = [];
-  //   _.each(ssInputs, function(data)
-  //   {
-  //     var index = data.index;
-  //     var jquery = "ans_" + index;
-  //     var ans = $('#' + jquery).val();
-  //     array.push({ssInputs: data, ans: ans});
-  //   });
-
-  //   console.log(array);
-  // },
-
   'click #addSuccessStoryDetails': function()
   {
     var authorInfo                = true;
@@ -182,7 +166,7 @@ Template.modalAdd_successStory.events =
     }
   },
 
-  'click .modalClose': function()
+  'click #closeModal': function()
   {
     Session.set("hidden", true);
     Session.set("hidden_successStory", true);
@@ -194,7 +178,15 @@ Template.modalAdd_successStory.events =
     $('#authorCompanyAdd_modalSuccessStory').val('');
     $('#authorTitleAdd_successStory').val('');
     $('#authorPhoneAdd_successStory').val('');
+    var ssInputs = SuccessStoryInputs.findOne({}).inputs;
+    _.each(ssInputs, function(data)
+    {
+      var index = data.index;
+      var jquery = "ans_" + index;
+      $('#' + jquery).val('');
+    });
     $('#authorEmailAdd_successStory').val('');
+    $('#modalAdd_successStory').modal('hide'); 
   },
 
   'click #clientAdd_submit': function()
@@ -239,11 +231,11 @@ Template.modalAdd_successStory.events =
     }
   },
 
-  'click .closeModal': function()
-  {
-    Session.set("hidden", true);
-    Session.set("hidden_successStory", true);
-  }
+  // 'click .closeModal': function()
+  // {
+  //   Session.set("hidden", true);
+  //   Session.set("hidden_successStory", true);
+  // }
 
 }
 

@@ -35,6 +35,12 @@
           return 0;
       });
     return ss;
+  },
+
+  clientCompany: function()
+  {
+    var cc = Projects.findOne({_id: this.project}).clientCompany;
+    return ClientCompanies.findOne({_id: cc}).name;
   }
 
 

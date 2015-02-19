@@ -21,18 +21,18 @@ Template.modalEdit_successStory.events =
     var executeSuccessStorySubmit = true;
     var author                   = null;
     var project                  = $('#projectName_modalSuccessStory').val().trim();
-    var successStory              = $('#successStory_modalSuccessStory').val().trim();
+    //var successStory              = $('#successStory_modalSuccessStory').val().trim();
 
     if (project == "" || project == null || project == undefined)
     {
       alert("Please Enter Project Name");
       executeSuccessStorySubmit = false;
     }
-    else if (successStory == "" || successStory == null || successStory == undefined)
-    {
-      alert("Please Enter SuccessStory");
-      executeSuccessStorySubmit = false;
-    }
+    // else if (successStory == "" || successStory == null || successStory == undefined)
+    // {
+    //   alert("Please Enter SuccessStory");
+    //   executeSuccessStorySubmit = false;
+    // }
     else
     {
       if (Session.get("hidden_successStory"))
@@ -91,12 +91,26 @@ Template.modalEdit_successStory.events =
       if (authorInfo && executeSuccessStorySubmit)
       {
 
+        //Find all success story input data before submitting to DB
+        //var companyId = Companies.findOne({})._id;
+        var ssInputs = SuccessStoryInputs.findOne({}).inputs;
+        var array = [];
+        _.each(ssInputs, function(data)
+        {
+          var index = data.index;
+          var jquery = "ans_" + index;
+          var ans = $('#' + jquery).val();
+          array.push({ssInputs: data, ans: ans});
+          $('#' + jquery).val('');
+        });
+
         if (Session.get("hidden_successStory"))
         {
           var successStoryDetails = {
                                 project: project,
                                 author: author,
-                                successStory: successStory
+                                SSInputs: array,
+                                SSName: successStoryName
                               };
           console.log("author Id after successStory details is: " + author);
 
@@ -128,7 +142,8 @@ Template.modalEdit_successStory.events =
             var successStoryDetails = {
                                 project: project,
                                 author: result,
-                                successStory: successStory
+                                SSInputs: array,
+                                SSName: successStoryName
                               };
             //console.log("author Id after successStory details is: " + author);
 
@@ -138,7 +153,7 @@ Template.modalEdit_successStory.events =
             var successStory = SuccessStorys.findOne({_id: Session.get("successStoryId")}).successStory;
             $('#projectName_modalSuccessStory').val(projectId);
             $('#authorName_modalSuccessStory').val(authorId);
-            $('#successStory_modalSuccessStory').val(successStory);
+            //$('#successStory_modalSuccessStory').val(successStory);
             $('#authorNameAdd_successStory').val('');
             $('#authorNameCompany_successStory').val('');
             $('#authorTitleAdd_successStory').val('');
@@ -154,21 +169,31 @@ Template.modalEdit_successStory.events =
     }
   },
 
-  'click .modalClose': function()
+  'click #closeModal': function()
   {
-    var projectId = SuccessStorys.findOne({_id: Session.get("successStoryId")}).project;
-    var authorId = SuccessStorys.findOne({_id: Session.get("successStoryId")}).author;
-    var successStory = SuccessStorys.findOne({_id: Session.get("successStoryId")}).successStory;
+    console.log("in close modal");
+    var projectId = SuccessStories.findOne({_id: Session.get("successStoryId")}).project;
+    var authorId = SuccessStories.findOne({_id: Session.get("successStoryId")}).author;
+    //var successStory = SuccessStorys.findOne({_id: Session.get("successStoryId")}).successStory;
     Session.set("hidden", true);
     Session.set("hidden_successStory", true);
     $('#projectName_modalSuccessStory').val(projectId);
     $('#authorName_modalSuccessStory').val(authorId);
-    $('#successStory_modalSuccessStory').val(successStory);
+    //$('#successStory_modalSuccessStory').val(successStory);
     $('#authorNameAdd_successStory').val('');
     $('#authorNameCompany_successStory').val('');
     $('#authorTitleAdd_successStory').val('');
     $('#authorPhoneAdd_successStory').val('');
     $('#authorEmailAdd_successStory').val('');
+    var ssInputs = SuccessStoryInputs.findOne({}).inputs;
+    _.each(ssInputs, function(data)
+    {
+      var index = data.index;
+      var jquery = "ans_" + index;
+      console.log(index + " " + jquery);
+      $('#' + jquery).val('');
+    });
+    $('#modalEdit_successStory').modal('hide'); 
   },
 
   'click #clientAdd_submit': function()
@@ -213,11 +238,11 @@ Template.modalEdit_successStory.events =
     }
   },
 
-  'click .closeModal': function()
-  {
-    Session.set("hidden", true);
-    Session.set("hidden_successStory", true);
-  }
+  // 'click .closeModal': function()
+  // {
+  //   Session.set("hidden", true);
+  //   Session.set("hidden_successStory", true);
+  // }
 
 }
 
@@ -241,11 +266,6 @@ Template.modalEdit_successStory.helpers({
       return "";
   },
 
-  // successStorySelected: function()
-  // {
-  //   return SuccessStories.findOne({_id: Session.get("successStoryId")}).successStory;
-  // },
-
   hidden_successStory: function()
   {
     var hidden_successStory = Session.get("hidden_successStory");
@@ -259,6 +279,31 @@ Template.modalEdit_successStory.helpers({
       $('.authorSelect').hide();
       return false;
     }
+  },
+
+  SSInput: function()
+  {
+    if (SuccessStories.findOne({_id: this._id}) != undefined)
+    {
+      var array = [];
+      var ss = SuccessStories.findOne({_id: this._id}).SSInputs;
+      ss.sort(function(a,b)
+      {
+        var a_ss_num_int = parseInt(a.ssInputs.num);
+        var b_ss_num_int = parseInt(b.ssInputs.num);
+        if(a_ss_num_int > b_ss_num_int)
+          return 1;
+        else if (a_ss_num_int < b_ss_num_int)
+          return -1;
+        else
+          return 0;
+      });
+      _.each(ss, function(ssData) {
+        array.push({ques:ssData.ssInputs.ques, ans: ssData.ans});
+      });
+      return array;
+    }
+    return;
   },
 
   project: function()
