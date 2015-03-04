@@ -122,20 +122,9 @@ Template.admin.events =
 
   'click .editSSInput': function()
   {
-    var index = this.ss_index;
-    var ssInput = SuccessStoryInputs.findOne({}).inputs;
-    Session.set("editSSInput", index);
-    $('#ssInputEdit').val( ssInput[index].ques );
-    $('#ssInputNumEdit').val( ssInput[index].num );
-  },
-
-  'click .editSSInputQues': function()
-  {
-    var index = this.ss_index;
-    var ssInput = SuccessStoryInputs.findOne({}).inputs;
-    Session.set("editSSInput", index);
-    $('#ssInputEditQues').val( ssInput[index].ques );
-    $('#ssInputNumEditQues').val( ssInput[index].num );
+    Session.set("editSSInput", this.ss_index);
+    $('#ssInputEdit').val( this.ss_ques );
+    $('#ssInputNumEdit').val( this.ss_num );
   },
 
   'click #editClientDetails': function()
@@ -411,6 +400,7 @@ Template.admin.events =
   'click .deleteSSInput': function()
   {
     var ss = this;
+    console.log(ss);
     Session.set("editSSInput", ss);
   },
 
