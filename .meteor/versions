@@ -49,7 +49,7 @@ livedata@1.0.12
 localstorage@1.0.2
 logging@1.0.6
 manuelschoebel:ms-seo@0.4.1
-matb33:collection-hooks@0.7.9
+matb33:collection-hooks@0.7.11
 meteor@1.1.4
 meteor-platform@1.2.1
 meteorhacks:inject-initial@1.0.0
@@ -75,6 +75,7 @@ schnie:uploader@2.0.3
 service-configuration@1.0.3
 session@1.0.5
 sha@1.0.2
+sjors:meteor-masonry@0.0.1
 softwarerero:accounts-t9n@1.0.3
 spacebars@1.0.5
 spacebars-compiler@1.0.4
