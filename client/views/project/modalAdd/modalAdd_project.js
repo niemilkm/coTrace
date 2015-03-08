@@ -117,6 +117,11 @@ Template.modalAdd_project.helpers({
 
   hidden: function()
   {
+    if (Session.get("hidden") == undefined)
+    {
+      Session.set("hidden", true);
+      return true;
+    }
     return Session.get("hidden");
   },
 

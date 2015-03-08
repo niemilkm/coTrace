@@ -11,7 +11,9 @@ Router.map(function() {
       //return this.subscribe("items");
     //},
     data: {
-      projects: Projects.find({})
+      projects: Projects.find({}),
+      category: Categories.find({}),
+      client: ClientCompanies.find({})
     },
     onAfterAction: function() {
       SEO.set({

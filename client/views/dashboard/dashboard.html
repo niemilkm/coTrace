@@ -1,10 +1,10 @@
 <template name="dashboard">
-  <div class="container dashboard">
-
+  <div class="container dashboard page-content-wrapper">
     <div class="page-header">
       <h1>Dashboard</h1>
       <div class="page-header-actions">
         <p>
+          <button class="btn btn-default pull-left searchModal">Filter Options</button>
           <button class="btn btn-default pull-right open-modal_addSuccessStory" data-toggle="modal" data-target="#modalAdd_successStory"><i class="fa fa-plus"></i>  Success Story</button>
           <button class="btn btn-default pull-right open-modal_addTestimonial" data-toggle="modal" data-target="#modalAdd_testimonial"><i class="fa fa-plus"></i>  Testimonial</button>
           <button class="btn btn-default pull-right open-modal" data-toggle="modal" data-target="#modalAdd_project"><i class="fa fa-plus"></i> Project</button>
@@ -12,31 +12,20 @@
       <br><br>
       </div>
     </div>
-    <div class="col-md-2">
-      {{> filter_category}}
+
+    <div class="row">
+      {{> search2}}
     </div>
+
+
+
+
+
+    <div id="mainContent" class="container-fluid">
       {{#each projects}}
-        <div class="col-md-3">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">
-                {{name}} <small>{{clientCompany.name}}</small>
-              </h3>
-            </div>
-            <div class="panel-body">
-              <p>
-                {{testimonialCount}} testimonials
-                <br>
-                {{successStoryCount}} success stories
-              </p>
-            </div>
-            <div class="panel-footer">
-              <div class="panel-meta pull-left">{{projectCategory.name}} <span>&#8226;</span> {{date.end}}</div>
-              <a href="/project/view/{{_id}}" class="pull-right"><small>View Project <i class="fa fa-angle-right"></i></small></a>
-            </div>
-          </div>
-        </div>
+        {{> projectItem}}
       {{/each}}
+    </div>
   </div>
 
   {{> modalAdd_project}}

@@ -26,4 +26,5 @@ dburles:factory
 anti:fake
 cunneen:mailgun
 momentjs:moment
-sjors:meteor-masonry
+cfs:standard-packages
+cfs:gridfs
