@@ -422,6 +422,12 @@ Template.admin.events =
 
   'click .ssInputEdit': function() {
     Session.set("editDelete", 5); // 0=none, 1=client, 2=author, 3=category, 4=tag, 5=ssInput
+  },
+
+  'change .companyLogoImage': function(event, template) {
+    FS.Utility.eachFile(event, function(file) {
+      Meteor.call("companyImages_insert", file) 
+    });
   }
   
 }
