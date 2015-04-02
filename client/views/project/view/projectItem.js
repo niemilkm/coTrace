@@ -1,4 +1,4 @@
- Template.projectItem.helpers({
+ Template.projectItemmmm.helpers({
   // eachProject: function() moved this to routes.js
   // {
   //   console.log(Projects.find({}).count())

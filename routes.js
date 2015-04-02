@@ -13,7 +13,8 @@ Router.map(function() {
     data: {
       projects: Projects.find({}),
       category: Categories.find({}),
-      client: ClientCompanies.find({})
+      client: ClientCompanies.find({}),
+      tag: Tags.find({})
     },
     onAfterAction: function() {
       SEO.set({

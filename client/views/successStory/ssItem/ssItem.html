@@ -1,0 +1,20 @@
+<template name="ssItem">
+  <div class="col-md-4">
+    <div class="panel panel-default projectItem">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          {{info.ssName}} <small>{{info.clientCompany}}</small>
+        </h3>
+      </div>
+      <div class="panel-body">
+        <p>
+          {{info.testimonial}}
+        </p>
+      </div>
+      <div class="panel-footer">
+        <div class="panel-meta pull-left">{{info.category}} <span></span></div>
+        <a href="/successStory/view/{{_id}}" class="pull-right"><small>View Success Story <i class="fa fa-angle-right"></i></small></a>
+      </div>
+    </div>
+  </div>
+</template>

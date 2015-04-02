@@ -84,6 +84,11 @@ Template.admin.helpers({
     return false;
   },
 
+  picture: function()
+  {
+    return Images.find({});
+  }
+
 });
 
 Template.admin.events = 
@@ -183,7 +188,7 @@ Template.admin.events =
     });
   },
 
-  'click #clientAdd_submit': function()
+  'click #clientAdd_submitREMOVE': function()
   {
     var client = $('#clientAdd').val().trim();
     if (client == "" || client == null || client == undefined)
@@ -424,10 +429,5 @@ Template.admin.events =
     Session.set("editDelete", 5); // 0=none, 1=client, 2=author, 3=category, 4=tag, 5=ssInput
   },
 
-  'change .companyLogoImage': function(event, template) {
-    FS.Utility.eachFile(event, function(file) {
-      Meteor.call("companyImages_insert", file) 
-    });
-  }
   
 }

@@ -1,9 +1,9 @@
-<template name="search2">
-    <div class="well bs-sidebar" id="searchSidebar">
+<template name="filter">
+    <div class="well bs-sidebar" id="filterSidebar">
       <div class="nav nav-pills nav-stacked">
         <div class="col-md-3">
           <label>Type</label>
-          <select id="search_type" class="form-control" title="Type">
+          <select id="filter_type" class="form-control" title="Type">
             <option value="project">Project</option>
             <option value="testimonial">Testimonial</option>
             <option value="ss">Success Story</option>
@@ -11,8 +11,8 @@
         </div>
         <div class="col-md-3">
           <label>Category</label>
-          <select id="search_category" class="form-control">
-            <option value=""></option>
+          <select id="filter_category" class="form-control">
+            <option value="all">All</option>
             {{#each category}}
               <option value="{{_id}}">{{name}}</option>
             {{/each}}
@@ -20,8 +20,8 @@
         </div>
         <div class="col-md-3">
           <label>Client/Company Name</label>
-          <select id="search_client" class="form-control" title="Choose Author">
-            <option value=""></option>
+          <select id="filter_client" class="form-control" title="Choose Author">
+            <option value="all">All</option>
             {{#each client}}
               <option value="{{_id}}">{{name}}</option>
             {{/each}}
@@ -29,8 +29,8 @@
         </div>
         <div class="col-md-3">
           <label>Tag</label>
-          <select id="search_tag" class="form-control">
-            <option value=""></option>
+          <select id="filter_tag" class="form-control">
+            <option value="all">All</option>
             {{#each tag}}
               <option value="{{_id}}">{{name}}</option>
             {{/each}}

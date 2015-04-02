@@ -26,5 +26,3 @@ dburles:factory
 anti:fake
 cunneen:mailgun
 momentjs:moment
-cfs:standard-packages
-cfs:gridfs

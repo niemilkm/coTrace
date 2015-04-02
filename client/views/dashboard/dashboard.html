@@ -14,7 +14,7 @@
     </div>
 
     <div class="row">
-      {{> search2}}
+      {{> filter}}
     </div>
 
 
@@ -22,8 +22,14 @@
 
 
     <div id="mainContent" class="container-fluid">
-      {{#each projects}}
-        {{> projectItem}}
+      {{#each items}}
+        {{#if equals 'project'}}
+          {{> projectItem}}
+        {{else}} {{#if equals 'testimonial'}}
+          {{> testimonialItem}}
+        {{else}} {{#if equals 'ss'}}
+          {{> ssItem}}
+        {{/if}}{{/if}}{{/if}}
       {{/each}}
     </div>
   </div>
