@@ -20,6 +20,7 @@ Router.map(function() {
       SEO.set({
         title: 'Dashboard | ' + SEO.settings.title
       });
+      Session.set("filter_type", "project")
     }
   });
 

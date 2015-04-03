@@ -3,7 +3,6 @@ Template.testimonialItem.helpers({
 
 	info: function()
 	{
-		console.log(this);
 		var project = Projects.findOne({_id: this.project});
 		return {
 					pName: 			project.name,

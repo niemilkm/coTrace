@@ -29,6 +29,54 @@ Meteor.methods({
 
 	remove_successStory_byId: function(Id) {
 		SuccessStories.remove({_id: Id})
+	},
+
+	insert_successStory_input: function(id, SSInputs_partialInfo) {
+		var SSInputs = SSInputs_partialInfo;
+		var indexAndNum = {};
+		Meteor.call("findNextIndexAndHighestNum", id, function(error, data) {
+			indexAndNum = data;
+			SSInputs.ssInputs.num = indexAndNum.num;
+			SSInputs.ssInputs.index = indexAndNum.index;
+			console.log(SSInputs);
+			//SuccessStories.update({_id: id}, {$push: {SSInputs:}});
+		});
+	},
+
+	findNextIndexAndHighestNum: function(id)
+	{
+		var ss = SuccessStories.find({_id: id}).SSInputs;
+		Meteor.call("sort_ssInputs_LowToHigh", ss, function(error, data) {
+			var ss_sorted = data;
+		});
+		var count = 0;
+		var lastNum = 0;
+		var foundIndex = false;
+		_.each(ss_sorted, function(data)
+		{
+			if (ss_sorted.index != count && !foundIndex)
+			{
+				count == ss_sorted.index;
+				foundIndex = true;
+			}
+			lastNum = ss_sorted.num;
+		});
+
+		return [{index: count}, {num: lastNum + 1}];
+
+	},
+
+	sort_ssInputs_LowToHigh: function(SSInputs)
+	{
+		return SSInputs.sort(function(a,b)
+		{
+			if(a.ssInputs.num > b.ssInputs.num)
+	          return 1;
+	        else if (a.ssInputs.num < b.ssInputs.num)
+	          return -1;
+	        else
+	          return 0;
+		});
 	}
 
 });

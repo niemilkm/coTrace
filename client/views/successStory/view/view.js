@@ -26,15 +26,15 @@
   inputs: function()
   {
     var ss = SuccessStories.findOne({_id: this._id}).SSInputs;
-    ss.sort(function(a,b) {
-        if(a.ssInputs.num > b.ssInputs.num)
-          return 1;
-        else if (a.ssInputs.num < b.ssInputs.num)
-          return -1;
-        else
-          return 0;
-      });
-    return ss;
+    // ss.sort(function(a,b) {
+    //     if(a.ssInputs.num > b.ssInputs.num)
+    //       return 1;
+    //     else if (a.ssInputs.num < b.ssInputs.num)
+    //       return -1;
+    //     else
+    //       return 0;
+    //   });
+    return sort_ssInputs_LowToHigh(ss);
   },
 
   clientCompany: function()

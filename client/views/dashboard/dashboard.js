@@ -11,17 +11,22 @@ Template.dashboard.helpers({
 		var type=Session.get("filter_type");
 		var selector = {};
 		if (Session.get("filter_category") && Session.get("filter_category") != "all") selector.categories = Session.get("filter_category");
-	  	if (Session.get("filter_client")) selector.clientCompany = Session.get("filter_client");
-	  	if (Session.get("filter_tag")) selector.tags = Session.get("filter_tag");
+	  	if (Session.get("filter_client") && Session.get("filter_client") != "all") selector.clientCompany = Session.get("filter_client");
+	  	if (Session.get("filter_tag") && Session.get("filter_tag") != "all") selector.tags = Session.get("filter_tag");
 
+	  	var projects = Projects.find(selector).fetch();
 		if (type=="project")
-		{
-			return Projects.find(selector);
-		}
+			return projects;
 		else if (type=="testimonial")
-			return Testimonials.find();
+		{
+			var ids = createArray_ProjectIds(projects);
+			return Testimonials.find({project: {$in: ids}});
+		}
 		else if (type=="ss")
-			return SuccessStories.find()
+		{
+			var ids = createArray_ProjectIds(projects);
+			return SuccessStories.find({project: {$in: ids}})
+		}
 	}
 
 });
