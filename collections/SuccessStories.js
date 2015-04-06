@@ -34,45 +34,57 @@ Meteor.methods({
 	insert_successStory_input: function(id, SSInputs_partialInfo) {
 		var SSInputs = SSInputs_partialInfo;
 		var indexAndNum = {};
-		Meteor.call("findNextIndexAndHighestNum", id, function(error, data) {
-			indexAndNum = data;
-			SSInputs.ssInputs.num = indexAndNum.num;
-			SSInputs.ssInputs.index = indexAndNum.index;
-			console.log(SSInputs);
-			//SuccessStories.update({_id: id}, {$push: {SSInputs:}});
+		Meteor.call("findNextIndexAndHighestNum", id, function(error, result) {
+			if (!error)
+			{
+				indexAndNum = result;
+				SSInputs.ssInputs.num = indexAndNum.num;
+				SSInputs.ssInputs.index = indexAndNum.index;
+				SuccessStories.update({_id: id}, {$push: {SSInputs: SSInputs}});
+			}
+			else
+				console.log("there was an error");
 		});
 	},
 
 	findNextIndexAndHighestNum: function(id)
 	{
-		var ss = SuccessStories.find({_id: id}).SSInputs;
-		Meteor.call("sort_ssInputs_LowToHigh", ss, function(error, data) {
-			var ss_sorted = data;
+		var ss = SuccessStories.findOne({_id: id}).SSInputs;
+		var ss_sorted;
+		Meteor.call("sort_ssInputs_LowToHighByIndex", ss, function(error, result) {
+			if (!error)
+				ss_sorted = result;
 		});
 		var count = 0;
-		var lastNum = 0;
+		var indexNum = 0;
+		var quesNum = 1;
 		var foundIndex = false;
 		_.each(ss_sorted, function(data)
 		{
-			if (ss_sorted.index != count && !foundIndex)
+			if (data.ssInputs.index != count && !foundIndex)
 			{
-				count == ss_sorted.index;
+				indexNum = count;
 				foundIndex = true;
 			}
-			lastNum = ss_sorted.num;
-		});
+			else
+				count++;
+			if (data.ssInputs.num > quesNum) quesNum = data.ssInputs.num;
 
-		return [{index: count}, {num: lastNum + 1}];
+		});
+		if (!foundIndex)
+			indexNum = count;
+
+		return {index: indexNum, num: quesNum + 1};
 
 	},
 
-	sort_ssInputs_LowToHigh: function(SSInputs)
+	sort_ssInputs_LowToHighByIndex: function(SSInputs)
 	{
 		return SSInputs.sort(function(a,b)
 		{
-			if(a.ssInputs.num > b.ssInputs.num)
+			if(a.ssInputs.index > b.ssInputs.index)
 	          return 1;
-	        else if (a.ssInputs.num < b.ssInputs.num)
+	        else if (a.ssInputs.index < b.ssInputs.index)
 	          return -1;
 	        else
 	          return 0;
