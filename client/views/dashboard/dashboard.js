@@ -14,18 +14,18 @@ Template.dashboard.helpers({
 	  	if (Session.get("filter_client") && Session.get("filter_client") != "all") selector.clientCompany = Session.get("filter_client");
 	  	if (Session.get("filter_tag") && Session.get("filter_tag") != "all") selector.tags = Session.get("filter_tag");
 
-	  	var projects = Projects.find(selector).fetch();
+	  	var projects = Projects.find(selector, {sort: {dateCreated: -1}}).fetch();
 		if (type=="project")
 			return projects;
 		else if (type=="testimonial")
 		{
 			var ids = createArray_ProjectIds(projects);
-			return Testimonials.find({project: {$in: ids}});
+			return Testimonials.find({project: {$in: ids}}, {sort: {dateCreated: -1}});
 		}
 		else if (type=="ss")
 		{
 			var ids = createArray_ProjectIds(projects);
-			return SuccessStories.find({project: {$in: ids}})
+			return SuccessStories.find({project: {$in: ids}}, {sort: {dateCreated: -1}});
 		}
 	}
 
