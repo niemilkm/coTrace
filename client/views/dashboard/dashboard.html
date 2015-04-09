@@ -21,15 +21,18 @@
 
 
 
-    <div id="mainContent" class="container-fluid">
+    <div id="mainContent" class="container js-masonry">
+      {{reRenderPage}}
       {{#each items}}
-        {{#if equals 'project'}}
-          {{> projectItem}}
-        {{else}} {{#if equals 'testimonial'}}
-          {{> testimonialItem}}
-        {{else}} {{#if equals 'ss'}}
-          {{> ssItem}}
-        {{/if}}{{/if}}{{/if}}
+        <div class="item">
+          {{#if equals 'project'}}
+            {{> projectItem}}
+          {{else}} {{#if equals 'testimonial'}}
+            {{> testimonialItem}}
+          {{else}} {{#if equals 'ss'}}
+            {{> ssItem}}
+          {{/if}}{{/if}}{{/if}}
+        </div>
       {{/each}}
     </div>
   </div>

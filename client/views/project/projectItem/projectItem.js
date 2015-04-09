@@ -1,3 +1,9 @@
+
+Template.dashboard.rendered = function()
+{
+  $('#mainContent').masonry('reloadItems');
+}
+
  Template.projectItem.helpers({
   // eachProject: function() moved this to routes.js
   // {

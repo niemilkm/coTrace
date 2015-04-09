@@ -1,7 +1,21 @@
 Template.dashboard.rendered = function()
 {
-  $('#filterSidebar').hide();
-}
+  	$('#filterSidebar').hide();
+
+  	//Masonry
+  	var $container = $('#mainContent');
+// initialize
+	$container.imagesLoaded( function() 
+	{
+		$container.masonry({
+		  //columnWidth: 60,
+		  itemSelector: '.item',
+		  transformsEnabled: false
+		});
+	});
+
+	Session.get("reRenderPage");
+};
 
 Template.dashboard.helpers({
 
@@ -27,6 +41,17 @@ Template.dashboard.helpers({
 			var ids = createArray_ProjectIds(projects);
 			return SuccessStories.find({project: {$in: ids}}, {sort: {dateCreated: -1}});
 		}
+	},
+
+	reRenderPage: function()
+	{
+		console.log("in reRenderPage");
+		Session.get("reRenderPage");
+		$('#mainContent').masonry({
+		  //columnWidth: 60,
+		  itemSelector: '.item',
+		  transformsEnabled: false
+		});
 	}
 
 });

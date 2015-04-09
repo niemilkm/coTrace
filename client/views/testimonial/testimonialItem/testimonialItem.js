@@ -1,4 +1,9 @@
 
+Template.dashboard.rendered = function()
+{
+	$('#mainContent').masonry('reloadItems');
+}
+
 Template.testimonialItem.helpers({
 
 	info: function()
