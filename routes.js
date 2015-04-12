@@ -34,7 +34,7 @@ Router.map(function() {
   this.route('admin', {
     path: '/admin',
     onAfterAction: function() {
-      Session.set("editDelete", 0)
+      Session.set("editDelete", 0);
     }
   });
 

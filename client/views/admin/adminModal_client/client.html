@@ -1,0 +1,46 @@
+<template name="client">
+
+	<div class="headerTitle">
+	  <h3>Clients</h3>
+	</div>
+	<div class="row">
+	  <div class="col-md-10">
+	    <input id="clientAdd" type="text" class="form-control">
+	    <p><button id="clientAdd_submit" type="submit" class="pull-right btn btn-blue btn-sm"> <i class=" fa fa-plus"> Add Client</i></button>
+	    <input type="file" id="companyLogoImage_upload"></p><br><br>
+	  </div>
+	</div>
+	<ul>
+	{{#each eachClient}}
+	<li><div class="row">
+	  <div class="col-md-2">
+	    <button class="btn btn-blue btn-xs deleteClient" data-toggle="modal" data-target="#adminModal_deleteClient" data-id="{{_id}}"><i class="fa fa-trash-o icon-large"></i> Delete</button>
+	  </div>
+	  <div class="col-md-2">
+	    <button class="btn btn-blue btn-xs editClient" data-toggle="modal" data-target="#adminModal_editClient" data-id="{{_id}}"><i class="fa fa-edit icon-large"></i> Edit</button>
+	  </div>
+	  <div class="col-md-6">
+	    <p>{{name}}</p>
+	  </div>
+	</div></li>
+	{{/each}}
+	</ul>
+	{{> adminModal_editClient}}
+    {{> adminModal_deleteClient}}
+
+    <ul>
+    {{#each companyImage}}
+      <li><div>
+        <a href="{{link}}">
+          {{#if isImage}}
+            <img src="{{link}}">
+          {{/if}}
+        </a>
+        <br><br>
+        <a href="#" data-action="delete">Delete</a>
+      </div>
+     </li>
+    {{/each}}
+    </ul>
+
+</template>

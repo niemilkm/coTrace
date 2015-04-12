@@ -1,0 +1,12 @@
+.client ul {
+
+	list-style: none;
+	padding: 0;
+	margin: 0;
+
+}
+
+.client.headerTitle.h3 {
+	text-align: center;
+
+}

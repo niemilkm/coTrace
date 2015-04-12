@@ -1,6 +1,6 @@
 Template.admin.helpers({
 
-  eachClient: function()
+  eachClientRemove: function()
   {
     return ClientCompanies.find({});
   },
@@ -84,16 +84,16 @@ Template.admin.helpers({
     return false;
   },
 
-  picture: function()
-  {
-    return Images.find({});
-  }
+  // picture: function()
+  // {
+  //   return Images.find({});
+  // }
 
 });
 
 Template.admin.events = 
 {
-  'click .editClient': function()
+  'click .editClientREMOVE': function()
   {
     var clientName = ClientCompanies.findOne({_id: this._id}).name
     Session.set("editClient", this._id);
@@ -132,7 +132,7 @@ Template.admin.events =
     $('#ssInputNumEdit').val( this.ss_num );
   },
 
-  'click #editClientDetails': function()
+  'click #editClientDetailsREMOVE': function()
   {
     var clientName = $('#clientEdit').val().trim();
     Meteor.call("update_client", Session.get("editClient"), clientName);
@@ -427,7 +427,7 @@ Template.admin.events =
 
   'click .ssInputEdit': function() {
     Session.set("editDelete", 5); // 0=none, 1=client, 2=author, 3=category, 4=tag, 5=ssInput
-  },
+  }
 
   
 }
