@@ -10,3 +10,17 @@
 	text-align: center;
 
 }
+
+.client input[type=file]
+{
+
+    width: 90px;
+    color: transparent;
+    float: left;
+
+}
+
+.client .fileLabel
+{
+	font-weight: normal;
+}

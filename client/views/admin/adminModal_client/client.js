@@ -21,6 +21,15 @@ Template.client.helpers({
     	return _.contains(types, this.contentType);
 	},
 
+	uploadFileName: function()
+	{
+		if (Session.get('fileChosen'))
+		{
+			return Template.client.uploadFile.fileName;
+		}
+		return "Choose Client Image";
+	}
+
 });
 
 Template.client.events =
@@ -49,13 +58,44 @@ Template.client.events =
 		}
 		else
 		{
-		  $('#clientAdd').val('');
-		  Meteor.call("insert_client", client, function(error, result)
-		  {
-		  	if (!error)
-		  		CompanyImages.resumable.upload();
-		  	$('#companyLogoImage_upload').prop('disabled', false);
-		  });
+			if (Template.client.uploadFile)
+			{
+			  $('#clientAdd').val('');
+			  Meteor.call("insert_client", client, function(error, result)
+			  {
+			  	if (!error)
+			  	{
+			  		var file = Template.client.uploadFile;
+			  		//var file = uploadFile;
+			  		CompanyImages.insert(	{
+							    _id: file.uniqueIdentifier,
+							    filename: file.fileName,
+							    contentType: file.file.type,
+							    metadata: 	{ 
+							    				owner: Meteor.userId(),
+							    				client: result
+							    			}
+	  						},
+	  			function(err, _id)
+	  			{
+				    if (err)
+				    {
+				      console.warn('File creation failed', err);
+				      return;
+					}
+					else
+						Session.set('uploading', true);
+	    			// Once the document has been created we can upload our file information.
+	    			CompanyImages.resumable.upload();
+	    			Session.set('fileChosen', false);
+	  			});
+
+			  	}
+			  	$('#companyLogoImage_upload').prop('disabled', false);
+			  });
+			}
+			else
+				console.log("error add client upload file - undefined");
 		}
 	},
 
@@ -100,34 +140,43 @@ Template.client.events =
 
 Template.client.onRendered(function()
 {
-	console.log("onRendered ran");
+
+	Session.set('fileChosen', false);
+	CompanyImages.resumable.cancel(true); //this does not work but found work around
+	Template.client.uploadFile = undefined;
+
+
 	// Assign our button to be a browse button with resumable.
   CompanyImages.resumable.assignBrowse($('#companyLogoImage_upload'));
 
   // When you select a file this event fires at which point we upload the file.
   CompanyImages.resumable.on('fileAdded', function(file) {
 	$('#companyLogoImage_upload').prop('disabled', true);
+
+	Template.client.uploadFile = file;
+	Session.set('fileChosen', true);
+	//uploadFile = file;
 			
-  	CompanyImages.insert(	{
-						    _id: file.uniqueIdentifier,
-						    filename: file.fileName,
-						    contentType: file.file.type,
-						    metadata: 	{ 
-						    				owner: Meteor.userId(),
-						    			}
-  						},
-  			function(err, _id)
-  			{
-			    if (err)
-			    {
-			      console.warn('File creation failed', err);
-			      return;
-				}
-				else
-					Session.set('uploading', true);
-    			// Once the document has been created we can upload our file information.
-    			// CompanyImages.resumable.upload();
-  			});
+  	// CompanyImages.insert(	{
+			// 			    _id: file.uniqueIdentifier,
+			// 			    filename: file.fileName,
+			// 			    contentType: file.file.type,
+			// 			    metadata: 	{ 
+			// 			    				owner: Meteor.userId(),
+			// 			    			}
+  	// 					},
+  	// 		function(err, _id)
+  	// 		{
+			//     if (err)
+			//     {
+			//       console.warn('File creation failed', err);
+			//       return;
+			// 	}
+			// 	else
+			// 		Session.set('uploading', true);
+   //  			// Once the document has been created we can upload our file information.
+   //  			// CompanyImages.resumable.upload();
+  	// 		});
   });
 
 
@@ -143,6 +192,9 @@ Template.client.onRendered(function()
     console.warn("Error uploading", file.uniqueIdentifier);
     Session.set('uploading', undefined);
   });
+
+
+
 });
 
 Template.client.onCreated(function()
