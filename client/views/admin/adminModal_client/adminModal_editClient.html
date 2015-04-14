@@ -10,11 +10,20 @@
         </div>
         <div class="modal-body">
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 client">
               <form>
               	<label>Client</label>
                 <input id="clientEdit" type="text" class="form-control">
+                <input type='file' id="companyLogoImage_upload_edit">
+                <label class="fileLabel">{{uploadFileName_edit}}</label>
               </form>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              {{#if isImage_edit}}
+                <p><img src="{{companyImage_edit}}"></p>
+              {{/if}}
             </div>
           </div>
         </div>

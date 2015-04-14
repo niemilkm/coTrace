@@ -34,7 +34,11 @@ Template.adminModal_deleteClient.events =
       {
         Meteor.call("remove_project_byProjectIds", projectIds, function(error_project) {
           if (!error_project)
+          {
             Meteor.call("remove_client", Session.get("clientToDelete_id"));
+            var ci_id = CompanyImages.findOne({"metadata.clientCompany": Session.get("clientToDelete_id")})._id;
+            CompanyImages.remove(ci_id);
+          }
         });
       }
     });
