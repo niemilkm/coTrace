@@ -93,7 +93,7 @@ Template.client.events =
 		Session.set('fileChosen', false);
 	},
 
-	'click #editClientDetails': function()
+	'click #editClientDetailsREMOVE': function()
 	{
 		var clientName = $('#clientEdit').val().trim();
 		Meteor.call("update_client", Session.get("editClient"), clientName);
@@ -191,6 +191,55 @@ Template.client.events =
 
 }
 
+Template.adminModal_editClient.events =
+{
+	'click #editClientDetails': function()
+	{
+		var clientName = $('#clientEdit').val().trim();
+		Meteor.call("update_client", Session.get("editClient"), clientName);
+		if (Meteor.adminModal_editClient.uploadFile != undefined)
+		{
+			var ci = CompanyImages.findOne({"metadata.clientCompany": Session.get("editClient")})._id;
+			CompanyImages.remove(ci);
+
+			var file = Template.client.uploadFile;
+	  		//var file = uploadFile;
+	  		CompanyImages.insert({
+									    _id: file.uniqueIdentifier,
+									    filename: file.fileName,
+									    contentType: file.file.type,
+									    metadata: 	{ 
+									    				owner: Meteor.userId(),
+									    				clientCompany: result_id
+									    			}
+								},
+	  			function(err, _id)
+	  			{
+				    if (err)
+				    {
+				      console.warn('File creation failed', err);
+				      return;
+					}
+					else
+					{
+						Session.set('uploading', true);
+					
+	    			// Once the document has been created we can upload our file information.
+	    				CompanyImages.resumable.upload();
+	    				Session.set('fileChosen_edit', false);
+	    			}
+	    				
+	  			});
+
+			  	
+			  	$('#companyLogoImage_upload').prop('disabled', false);
+
+		}
+		$('#clientEdit').val('');
+		$('#adminModal_editClient').modal('hide');
+	},
+}
+
 Template.client.onRendered(function()
 {
 
@@ -236,7 +285,7 @@ Template.client.onCreated(function()
 Template.adminModal_editClient.onRendered(function()
 {
 
-	Session.set('fileChosen', false);
+	Session.set('fileChosen_edit', false);
 	CompanyImages.resumable.cancel(true); //this does not work but found work around
 	Template.adminModal_editClient.uploadFile = undefined;
 

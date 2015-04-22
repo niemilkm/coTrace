@@ -17,19 +17,23 @@
         <div class="col-md-2">
         </div>
         <div class="col-md-10">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">
-                {{author.name}} <small>{{author.title}}</small>
-              </h3>
+          <a href="/testimonial/view/{{_id}}">
+            <div class="panel panel-default projectItem">
+              <div class="panel-heading panel-heading-custom">
+                <h3 class="panel-title">
+                  {{author.name}} <small>{{author.title}}</small>
+                </h3>
+              </div>
+              <div class="panel-body itemBody">
+                {{testimonial}}
+              </div>
+              <div class="panel-footer">
+                <div class="panel-meta pull-left">
+                  Testimonial
+                </div>
+              </div>
             </div>
-            <div class="panel-body">
-              {{testimonial}}
-            </div>
-            <div class="panel-footer">
-              Testimonial<a href="/testimonial/view/{{_id}}" class="pull-right"><small>View Testimonial <i class="fa fa-angle-right"></i></small></a>
-            </div>
-          </div>
+          </a>
         </div>
       </div>
       {{/each}}
@@ -41,25 +45,29 @@
         <div class="col-md-2">
         </div>
         <div class="col-md-10">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">
-                {{name}}
-              </h3>
+          <a href="/successStory/view/{{_id}}">
+            <div class="panel panel-default projectItem">
+              <div class="panel-heading panel-heading-custom">
+                <h3 class="panel-title">
+                  {{name}}
+                </h3>
+              </div>
+              <div class="panel-body itemBody">
+                <!--{{#each inputAns}}
+                  <form>
+                    {{this.ques}}
+                    {{this.ans}}
+                  </form>
+                {{/each}}-->
+                {{inputAns}}
+              </div>
+              <div class="panel-footer">
+                <div class="panel-meta pull-left">
+                  Success Story
+                </div>
+              </div>
             </div>
-            <div class="panel-body">
-              <!--{{#each inputAns}}
-                <form>
-                  {{this.ques}}
-                  {{this.ans}}
-                </form>
-              {{/each}}-->
-              {{inputAns}}
-            </div>
-            <div class="panel-footer">
-              Success Story<a href="/successStory/view/{{_id}}" class="pull-right"><small>View Success Story <i class="fa fa-angle-right"></i></small></a>
-            </div>
-          </div>
+          </a>
         </div>
       </div>
       {{/each}}

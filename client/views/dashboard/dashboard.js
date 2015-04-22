@@ -1,20 +1,20 @@
 Template.dashboard.rendered = function()
 {
-  	$('#filterSidebar').hide();
+   	$('#filterSidebar').hide();
 
-  	//Masonry
-  	var $container = $('#mainContent');
-// initialize
-	$container.imagesLoaded( function() 
-	{
-		$container.masonry({
-		  //columnWidth: 60,
-		  itemSelector: '.item',
-		  transformsEnabled: false
-		});
-	});
+//   	//Masonry
+//   	var $container = $('#mainContent');
+// // initialize
+// 	$container.imagesLoaded( function() 
+// 	{
+// 		$container.masonry({
+// 		  //columnWidth: 60,
+// 		  itemSelector: '.item',
+// 		  transformsEnabled: false
+// 		});
+// 	});
 
-	Session.get("reRenderPage");
+// 	Session.get("reRenderPage");
 };
 
 Template.dashboard.helpers({
@@ -43,16 +43,16 @@ Template.dashboard.helpers({
 		}
 	},
 
-	reRenderPage: function()
-	{
-		console.log("in reRenderPage");
-		Session.get("reRenderPage");
-		$('#mainContent').masonry({
-		  //columnWidth: 60,
-		  itemSelector: '.item',
-		  transformsEnabled: false
-		});
-	}
+	// reRenderPage: function()
+	// {
+	// 	console.log("in reRenderPage");
+	// 	Session.get("reRenderPage");
+	// 	$('#mainContent').masonry({
+	// 	  //columnWidth: 60,
+	// 	  itemSelector: '.item',
+	// 	  transformsEnabled: false
+	// 	});
+	// }
 
 });
 

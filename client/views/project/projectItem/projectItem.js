@@ -1,7 +1,7 @@
 
 Template.dashboard.rendered = function()
 {
-  $('#mainContent').masonry('reloadItems');
+  //$('#mainContent').masonry('reloadItems');
 }
 
  Template.projectItem.helpers({
@@ -10,6 +10,11 @@ Template.dashboard.rendered = function()
   //   console.log(Projects.find({}).count())
   //   return Projects.find({});
   // },
+
+  projectName: function()
+  {
+    return stringTruncate(this.name, 20);
+  },
 
   testimonialCount: function()
   {

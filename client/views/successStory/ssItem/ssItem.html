@@ -1,20 +1,25 @@
 <template name="ssItem">
-  <!--<div class="col-md-4">-->
-    <div class="panel panel-default projectItem">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-          {{info.ssName}} <small>{{info.clientCompany}}</small>
-        </h3>
+  <div class="col-md-4">
+    <a href="/successStory/view/{{_id}}">
+      <div class="panel panel-default projectItem">
+        <div class="panel-heading panel-heading-custom">
+          <h3 class="panel-title">
+            {{info.ssName}}
+            <div class="pull-right">
+              <small>{{info.clientCompany}}</small>
+            </div>
+          </h3>
+        </div>
+        <div class="panel-body itemBody">
+          <p>
+            {{info.ss}}
+          </p>
+        </div>
+        <div class="panel-footer">
+          <div class="panel-meta pull-left">{{info.category}} <span></span></div>
+          <!--<a href="/successStory/view/{{_id}}" class="pull-right"><small>View Success Story <i class="fa fa-angle-right"></i></small></a>-->
+        </div>
       </div>
-      <div class="panel-body">
-        <p>
-          {{info.ss}}
-        </p>
-      </div>
-      <div class="panel-footer">
-        <div class="panel-meta pull-left">{{info.category}} <span></span></div>
-        <a href="/successStory/view/{{_id}}" class="pull-right"><small>View Success Story <i class="fa fa-angle-right"></i></small></a>
-      </div>
-    </div>
-  <!--</div>-->
+    </a>
+  </div>
 </template>

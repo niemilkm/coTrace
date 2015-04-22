@@ -1,22 +1,27 @@
 <template name="projectItem">
-  <!--<div class="col-md-4">-->
-    <div class="panel panel-default projectItem">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-          {{name}} <small>{{clientCompany.name}}</small>
-        </h3>
+  <div class="col-md-4">
+    <a href="/project/view/{{_id}}"> 
+      <div class="panel projectItem">
+        <div class="panel-heading panel-heading-custom">
+          <div class="panel-title">
+            {{projectName}}
+            <div class="pull-right">
+              <small>{{clientCompany.name}}</small>
+            </div>
+          </div>
+        </div>
+        <div class="panel-body itemBody">
+          <p>
+            {{testimonialCount}} testimonials
+            <br>
+            {{successStoryCount}} success stories
+          </p>
+        </div>
+        <div class="panel-footer">
+          <div class="panel-meta pull-left">{{projectCategory.name}} <span></span> {{date.end}}</div>
+          <!--<a href="/project/view/{{_id}}" class="pull-right"><small>View Project <i class="fa fa-angle-right"></i></small></a>-->
+        </div>
       </div>
-      <div class="panel-body">
-        <p>
-          {{testimonialCount}} testimonials
-          <br>
-          {{successStoryCount}} success stories
-        </p>
-      </div>
-      <div class="panel-footer">
-        <div class="panel-meta pull-left">{{projectCategory.name}} <span></span> {{date.end}}</div>
-        <a href="/project/view/{{_id}}" class="pull-right"><small>View Project <i class="fa fa-angle-right"></i></small></a>
-      </div>
-    </div>
-  <!--</div>-->
+    </a>
+  </div>
 </template>
