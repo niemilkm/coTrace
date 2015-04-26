@@ -14,14 +14,17 @@ Template.modalEdit_successStory.events =
     $('.authorSelect').hide();
   },
 
-  'click #addSuccessStoryDetails': function()
+  'click #editSuccessStoryDetails': function()
   {
+    console.log("in editSuccessStoryDetails");
+
     var successStoryId            = Session.get("successStoryId");
     var authorInfo               = true;
     var executeSuccessStorySubmit = true;
     var author                   = null;
     var project                  = $('#projectName_modalSuccessStory').val().trim();
     //var successStory              = $('#successStory_modalSuccessStory').val().trim();
+    var successStoryName          = $('#successStoryName_modalSuccessStory').val().trim();
 
     if (project == "" || project == null || project == undefined)
     {
@@ -90,16 +93,21 @@ Template.modalEdit_successStory.events =
 
       if (authorInfo && executeSuccessStorySubmit)
       {
-
+        console.log("this: "); console.log(this);
         //Find all success story input data before submitting to DB
         //var companyId = Companies.findOne({})._id;
-        var ssInputs = SuccessStoryInputs.findOne({}).inputs;
+        //var ssInputs = SuccessStoryInputs.findOne({}).inputs;
+        var ssInputs = this.SSInputs.ssInputs;
         var array = [];
+        console.log("answers: ");
         _.each(ssInputs, function(data)
         {
           var index = data.index;
-          var jquery = "ans_" + index;
+          console.log(index);
+          var jquery = 'ans_' + index;
+          console.log(jquery);
           var ans = $('#' + jquery).val();
+          console.log(ans);
           array.push({ssInputs: data, ans: ans});
           $('#' + jquery).val('');
         });
@@ -112,20 +120,21 @@ Template.modalEdit_successStory.events =
                                 SSInputs: array,
                                 SSName: successStoryName
                               };
-          console.log("author Id after successStory details is: " + author);
+
+          console.log(successStoryDetails);
 
           Meteor.call("update_successStory", successStoryDetails, successStoryId)
-          var projectId = SuccessStorys.findOne({_id: Session.get("successStoryId")}).project;
-          var authorId = SuccessStorys.findOne({_id: Session.get("successStoryId")}).author;
-          var successStory = SuccessStorys.findOne({_id: Session.get("successStoryId")}).successStory;
+          var projectId = SuccessStories.findOne({_id: Session.get("successStoryId")}).project;
+          var authorId = SuccessStories.findOne({_id: Session.get("successStoryId")}).author;
+          var successStory = SuccessStories.findOne({_id: Session.get("successStoryId")}).successStory;
           $('#projectName_modalSuccessStory').val(projectId);
           $('#authorName_modalSuccessStory').val(authorId);
           $('#successStory_modalSuccessStory').val(successStory);
-          $('#authorNameAdd_successStory').val('');
-          $('#authorNameCompany_successStory').val('');
-          $('#authorTitleAdd_successStory').val('');
-          $('#authorPhoneAdd_successStory').val('');
-          $('#authorEmailAdd_successStory').val('');
+          // $('#authorNameAdd_successStory').val('');
+          // $('#authorNameCompany_successStory').val('');
+          // $('#authorTitleAdd_successStory').val('');
+          // $('#authorPhoneAdd_successStory').val('');
+          // $('#authorEmailAdd_successStory').val('');
           $('#modalEdit_successStory').modal('hide');
         }
         else
@@ -151,14 +160,14 @@ Template.modalEdit_successStory.events =
             var projectId = SuccessStorys.findOne({_id: Session.get("successStoryId")}).project;
             var authorId = SuccessStorys.findOne({_id: Session.get("successStoryId")}).author;
             var successStory = SuccessStorys.findOne({_id: Session.get("successStoryId")}).successStory;
-            $('#projectName_modalSuccessStory').val(projectId);
-            $('#authorName_modalSuccessStory').val(authorId);
-            //$('#successStory_modalSuccessStory').val(successStory);
-            $('#authorNameAdd_successStory').val('');
-            $('#authorNameCompany_successStory').val('');
-            $('#authorTitleAdd_successStory').val('');
-            $('#authorPhoneAdd_successStory').val('');
-            $('#authorEmailAdd_successStory').val('');
+            // $('#projectName_modalSuccessStory').val(projectId);
+            // $('#authorName_modalSuccessStory').val(authorId);
+            // //$('#successStory_modalSuccessStory').val(successStory);
+            // $('#authorNameAdd_successStory').val('');
+            // $('#authorNameCompany_successStory').val('');
+            // $('#authorTitleAdd_successStory').val('');
+            // $('#authorPhoneAdd_successStory').val('');
+            // $('#authorEmailAdd_successStory').val('');
             $('#modalEdit_successStory').modal('hide'); 
           });
         }
@@ -177,14 +186,14 @@ Template.modalEdit_successStory.events =
     //var successStory = SuccessStorys.findOne({_id: Session.get("successStoryId")}).successStory;
     Session.set("hidden", true);
     Session.set("hidden_successStory", true);
-    $('#projectName_modalSuccessStory').val(projectId);
-    $('#authorName_modalSuccessStory').val(authorId);
-    //$('#successStory_modalSuccessStory').val(successStory);
-    $('#authorNameAdd_successStory').val('');
-    $('#authorNameCompany_successStory').val('');
-    $('#authorTitleAdd_successStory').val('');
-    $('#authorPhoneAdd_successStory').val('');
-    $('#authorEmailAdd_successStory').val('');
+    // $('#projectName_modalSuccessStory').val(projectId);
+    // $('#authorName_modalSuccessStory').val(authorId);
+    // //$('#successStory_modalSuccessStory').val(successStory);
+    // $('#authorNameAdd_successStory').val('');
+    // $('#authorNameCompany_successStory').val('');
+    // $('#authorTitleAdd_successStory').val('');
+    // $('#authorPhoneAdd_successStory').val('');
+    // $('#authorEmailAdd_successStory').val('');
     var ssInputs = SuccessStoryInputs.findOne({}).inputs;
     _.each(ssInputs, function(data)
     {
@@ -299,7 +308,7 @@ Template.modalEdit_successStory.helpers({
           return 0;
       });
       _.each(ss, function(ssData) {
-        array.push({ques:ssData.ssInputs.ques, ans: ssData.ans});
+        array.push({ques:ssData.ssInputs.ques, ans: ssData.ans, index:ssData.ssInputs.index});
       });
       return array;
     }

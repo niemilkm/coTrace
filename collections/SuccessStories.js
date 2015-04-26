@@ -8,7 +8,7 @@ Meteor.methods({
 	},
 
 	update_successStory: function(td, td_id) {
-		SuccessStories.update({_id: td_id}, {$set: {name: td.SSName, SSInput: td.SSInputs, project: td.project, author: td.author, dateUpdated: moment.utc()}});
+		SuccessStories.update({_id: td_id}, {$set: {name: td.SSName, SSInputs: td.SSInputs, project: td.project, author: td.author, dateUpdated: moment.utc()}});
 		console.log("success story updated");
 	},
 
@@ -24,11 +24,11 @@ Meteor.methods({
 	},
 
 	remove_successStory_byProjectId: function(projectId) {
-		SuccessStories.remove({project: projectId})
+		SuccessStories.remove({project: projectId});
 	},
 
 	remove_successStory_byId: function(Id) {
-		SuccessStories.remove({_id: Id})
+		SuccessStories.remove({_id: Id});
 	},
 
 	insert_successStory_input: function(id, SSInputs_partialInfo) {
@@ -68,7 +68,7 @@ Meteor.methods({
 			}
 			else
 				count++;
-			if (data.ssInputs.num > quesNum) quesNum = data.ssInputs.num;
+			if (Number(data.ssInputs.num) > quesNum) quesNum = Number(data.ssInputs.num);
 
 		});
 		if (!foundIndex)

@@ -39,15 +39,31 @@
         </div>
       </div>
     </div>
+    <br><br>
 
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         {{#each inputs}}
-          <form>
+          <div class="panel panel-default projectItem">
+            <div class="panel-heading panel-heading-custom">
+              {{ssInputs.ques}}
+            </div>
+            <div class="panel-body itemBody">
+              <p>
+                {{ans}}
+              </p>
+            </div>
+          </div>
+        {{/each}}
+
+
+
+
+          <!-- <form>
             <label>{{ssInputs.ques}}</label>
             <p>{{ans}}</p>
-          </form>
-        {{/each}}
+          </form> -->
+        
       </div>
     </div>
   </div>

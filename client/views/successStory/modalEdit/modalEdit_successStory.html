@@ -41,6 +41,12 @@
                     </select>
                   </div>
                 </div>
+                <div class="row">
+                  <div class="form-group col-md-12">
+                    <label>Success Story Name</label>
+                    <textarea id="successStoryName_modalSuccessStory" class="form-control" rows="1" type="text">{{name}}</textarea>
+                  </div>
+                </div>
                 {{#each SSInput}}
                 <div class="row">
                   <div class="form-group col-md-12">
@@ -55,7 +61,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" id="closeModal" class="btn btn-default closeModal">Cancel</button>
-          <button type="button" id="addSuccessStoryDetails" class="btn btn-primary">Update</button>
+          <button type="button" id="editSuccessStoryDetails" class="btn btn-primary">Update</button>
         </div>
       </div>
     </div>
